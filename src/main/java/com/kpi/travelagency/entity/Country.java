@@ -1,23 +1,18 @@
 package com.kpi.travelagency.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
 
 @Entity
 @Table(name="countries")
 public class Country {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id_country;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id_country;
+    @Column(name = "name", nullable = false)
     private String name;
 
-    public Country(UUID id_country, String name) {
+    public Country(Integer id_country, String name) {
         this.id_country = id_country;
         this.name = name;
     }
@@ -26,7 +21,7 @@ public class Country {
 
     }
 
-    public UUID getId_country() {
+    public Integer getId_country() {
         return id_country;
     }
 

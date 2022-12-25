@@ -3,18 +3,15 @@ package com.kpi.travelagency.entity;
 
 import com.kpi.travelagency.constants.TransportType;
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
 @Table(name="tours")
 public class Tour {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String name;
     private Double price;
     private LocalDate startDate;
@@ -22,11 +19,13 @@ public class Tour {
     private String description;
     private Integer duration;
     private City id_city;
-    private Country id_country;
+    private Country country;
     private Hotel id_hotel;
     private TransportType transportType;
 
-    public Tour(UUID id, String name, Double price, LocalDate startDate, LocalDate endDate, String description, Integer duration, City id_city, Country id_country, Hotel id_hotel, TransportType transportType) {
+    public Tour(Integer id, String name, Double price, LocalDate startDate,
+                LocalDate endDate, String description, Integer duration, City id_city,
+                Country id_country, Hotel id_hotel, TransportType transportType) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -35,7 +34,7 @@ public class Tour {
         this.description = description;
         this.duration = duration;
         this.id_city = id_city;
-        this.id_country = id_country;
+        this.country = id_country;
         this.id_hotel = id_hotel;
         this.transportType = transportType;
     }
@@ -44,7 +43,7 @@ public class Tour {
 
     }
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -71,18 +70,23 @@ public class Tour {
     public Integer getDuration() {
         return duration;
     }
+    @Id
     @OneToOne
     @JoinColumn(name = "id_city",nullable = false)
     public City getId_city() {
         return id_city;
     }
+    @Id
     @OneToOne
     @JoinColumn(name = "id_country",nullable = false)
-    public Country getId_country() {
-        return id_country;
+    public Country getCountry() {
+        return country;
     }
     @OneToOne
     @JoinColumn(name = "id_hotel",nullable = false)
+    @JoinColumns({@JoinColumn(name = "id_country",nullable = false),
+            @JoinColumn(name = "id_city",nullable = false)
+    } )
     public Hotel getId_hotel() {
         return id_hotel;
     }
@@ -99,8 +103,8 @@ public class Tour {
         this.name = name;
     }
 
-    public void setId_country(Country id_country) {
-        this.id_country = id_country;
+    public void setCountry(Country id_country) {
+        this.country = id_country;
     }
 
     public void setDescription(String description) {
@@ -115,7 +119,7 @@ public class Tour {
         this.endDate = endDate;
     }
 
-    public void setId(UUID id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -133,22 +137,5 @@ public class Tour {
 
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
-    }
-
-    @Override
-    public String toString() {
-        return "Tour{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", description='" + description + '\'' +
-                ", duration=" + duration +
-                ", id_city=" + id_city +
-                ", id_country=" + id_country +
-                ", id_hotel=" + id_hotel +
-                ", transportType=" + transportType +
-                '}';
     }
 }
