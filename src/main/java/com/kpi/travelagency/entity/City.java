@@ -1,45 +1,50 @@
 package com.kpi.travelagency.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
-
-import java.util.UUID;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="cities")
 public class City {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id_city;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id_city;
     private String name;
+    private Country country;
 
-    public City(UUID id_city, String name) {
+    public City(Integer id_city, String name, Country country) {
         this.id_city = id_city;
         this.name = name;
+        this.country = country;
     }
 
     public City() {
 
     }
 
-    public UUID getId_city() {
+    public Integer getId_city() {
         return id_city;
     }
 
     public String getName() {
         return name;
     }
+    @Id
+    @OneToOne
+    @JoinColumn(name = "id_country",nullable = false)
+    public Country getCountry() {
+        return country;
+    }
 
-    public void setId_city(UUID id_city) {
+    public void setId_city(Integer id_city) {
         this.id_city = id_city;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override
