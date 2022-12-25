@@ -14,7 +14,7 @@ public class Tour {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private final UUID id;
+    private UUID id;
     private String name;
     private Double price;
     private LocalDate startDate;
@@ -38,6 +38,10 @@ public class Tour {
         this.id_country = id_country;
         this.id_hotel = id_hotel;
         this.transportType = transportType;
+    }
+
+    public Tour() {
+
     }
 
     public UUID getId() {
@@ -67,21 +71,68 @@ public class Tour {
     public Integer getDuration() {
         return duration;
     }
-
+    @OneToOne
+    @JoinColumn(name = "id_city",nullable = false)
     public City getId_city() {
         return id_city;
     }
-
+    @OneToOne
+    @JoinColumn(name = "id_country",nullable = false)
     public Country getId_country() {
         return id_country;
     }
-
+    @OneToOne
+    @JoinColumn(name = "id_hotel",nullable = false)
     public Hotel getId_hotel() {
         return id_hotel;
     }
 
     public TransportType getTransportType() {
         return transportType;
+    }
+
+    public void setId_city(City id_city) {
+        this.id_city = id_city;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setId_country(Country id_country) {
+        this.id_country = id_country;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setId_hotel(Hotel id_hotel) {
+        this.id_hotel = id_hotel;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setTransportType(TransportType transportType) {
+        this.transportType = transportType;
     }
 
     @Override

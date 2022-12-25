@@ -1,10 +1,7 @@
 package com.kpi.travelagency.entity;
 
 import com.kpi.travelagency.constants.HotelType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
@@ -15,13 +12,13 @@ public class Hotel {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private final UUID id_hotel;
-    private final String name;
-    private final Double pricePerNight;
-    private final HotelType type;
-    private final City id_city;
-    private final Country id_country;
-    private final Integer rating;
+    private UUID id_hotel;
+    private String name;
+    private Double pricePerNight;
+    private HotelType type;
+    private City id_city;
+    private Country id_country;
+    private Integer rating;
 
     public Hotel(UUID id_hotel, String name, Double pricePerNight, HotelType type, City id_city, Country id_country, Integer rating) {
         this.id_hotel = id_hotel;
@@ -31,6 +28,10 @@ public class Hotel {
         this.id_city = id_city;
         this.id_country = id_country;
         this.rating = rating;
+    }
+
+    public Hotel() {
+
     }
 
     public UUID getId_hotel() {
@@ -49,16 +50,28 @@ public class Hotel {
         return type;
     }
 
+    @OneToOne
+    @JoinColumn(name = "id_city",nullable = false)
     public City getId_city() {
         return id_city;
     }
 
+    @OneToOne
+    @JoinColumn(name = "id_country",nullable = false)
     public Country getId_country() {
         return id_country;
     }
 
     public Integer getRating() {
         return rating;
+    }
+
+    public void setId_country(Country id_country) {
+        this.id_country = id_country;
+    }
+
+    public void setId_city(City id_city) {
+        this.id_city = id_city;
     }
 
     @Override

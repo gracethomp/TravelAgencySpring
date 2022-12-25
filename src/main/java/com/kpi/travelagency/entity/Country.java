@@ -14,12 +14,16 @@ public class Country {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private final UUID id_country;
-    private final String name;
+    private UUID id_country;
+    private String name;
 
     public Country(UUID id_country, String name) {
         this.id_country = id_country;
         this.name = name;
+    }
+
+    public Country() {
+
     }
 
     public UUID getId_country() {

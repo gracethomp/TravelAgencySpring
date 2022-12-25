@@ -14,8 +14,8 @@ public class City {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private final UUID id_city;
-    private final String name;
+    private UUID id_city;
+    private String name;
 
     public City(UUID id_city, String name) {
         this.id_city = id_city;
@@ -28,6 +28,14 @@ public class City {
 
     public String getName() {
         return name;
+    }
+
+    public void setId_city(UUID id_city) {
+        this.id_city = id_city;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
