@@ -22,6 +22,10 @@ public class City {
         this.name = name;
     }
 
+    public City() {
+
+    }
+
     public UUID getId_city() {
         return id_city;
     }
