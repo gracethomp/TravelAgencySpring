@@ -1,25 +1,38 @@
 package com.kpi.travelagency.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kpi.travelagency.constants.TransportType;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name="tours")
-public class Tour {
+@IdClass(City.class)
+public class Tour implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private Double price;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Column(name = "start_date")
     private LocalDate startDate;
     private LocalDate endDate;
     private String description;
     private Integer duration;
+
+    @OneToOne
+    @JoinColumn(name = "id_city",nullable = false)
+    @JoinColumns(@JoinColumn(name = "id_country",nullable = false))
     private City id_city;
+    @OneToOne
+    @JoinColumn(name = "id_country",nullable = false)
     private Country country;
+    @OneToOne
+    @JoinColumn(name = "id_hotel")
     private Hotel id_hotel;
     private TransportType transportType;
 
@@ -70,26 +83,18 @@ public class Tour {
     public Integer getDuration() {
         return duration;
     }
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id_city",nullable = false)
+
     public City getId_city() {
         return id_city;
     }
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id_country",nullable = false)
+
     public Country getCountry() {
         return country;
     }
-    @OneToOne
-    @JoinColumn(name = "id_hotel",nullable = false)
-    @JoinColumns({@JoinColumn(name = "id_country",nullable = false),
-            @JoinColumn(name = "id_city",nullable = false)
-    } )
-    public Hotel getId_hotel() {
+
+   /* public Hotel getId_hotel() {
         return id_hotel;
-    }
+    }*/
 
     public TransportType getTransportType() {
         return transportType;
@@ -137,5 +142,22 @@ public class Tour {
 
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
+    }
+
+    @Override
+    public String toString() {
+        return "Tour{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", description='" + description + '\'' +
+                ", duration=" + duration +
+                ", id_city=" + id_city +
+                ", country=" + country +
+                ", id_hotel=" + id_hotel +
+                ", transportType=" + transportType +
+                '}';
     }
 }

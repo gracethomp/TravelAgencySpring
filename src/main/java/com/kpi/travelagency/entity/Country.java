@@ -1,19 +1,20 @@
 package com.kpi.travelagency.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.GenericGenerator;
+
+import java.io.Serializable;
 
 @Entity
 @Table(name="countries")
-public class Country {
+public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_country;
+    private Integer id;
     @Column(name = "name", nullable = false)
     private String name;
 
     public Country(Integer id_country, String name) {
-        this.id_country = id_country;
+        this.id = id_country;
         this.name = name;
     }
 
@@ -21,8 +22,8 @@ public class Country {
 
     }
 
-    public Integer getId_country() {
-        return id_country;
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -32,7 +33,7 @@ public class Country {
     @Override
     public String toString() {
         return "Country{" +
-                "id_country=" + id_country +
+                "id_country=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }
