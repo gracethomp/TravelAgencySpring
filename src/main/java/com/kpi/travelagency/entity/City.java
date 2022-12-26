@@ -9,14 +9,14 @@ import java.io.Serializable;
 public class City implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "name")
+    private Long id;
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_country", nullable = false)
     private Country country;
 
-    public City(Integer id_city, String name, Country country) {
+    public City(Long id_city, String name, Country country) {
         this.id = id_city;
         this.name = name;
         this.country = country;
@@ -26,7 +26,7 @@ public class City implements Serializable {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -38,7 +38,7 @@ public class City implements Serializable {
         return country;
     }
 
-    public void setId(Integer id_city) {
+    public void setId(Long id_city) {
         this.id = id_city;
     }
 
