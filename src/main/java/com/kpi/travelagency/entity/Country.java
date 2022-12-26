@@ -9,11 +9,11 @@ import java.io.Serializable;
 public class Country implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    @Column(name = "name", nullable = false)
+    private Long id;
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    public Country(Integer id_country, String name) {
+    public Country(Long id_country, String name) {
         this.id = id_country;
         this.name = name;
     }
@@ -22,12 +22,20 @@ public class Country implements Serializable {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
