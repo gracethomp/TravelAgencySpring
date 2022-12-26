@@ -24,4 +24,16 @@ public class TourService {
         List<Tour> tours = new ArrayList<>(tourRepository.findAll());
         return tours;
     }
+    
+    public void save(Tour tour){
+        tourRepository.save(tour);
+    }
+
+    public Optional<Tour> get(Long id){
+        return tourRepository.findById(id);
+    }
+
+    public void delete(Long id){
+        tourRepository.deleteById(id);
+    }
 }
