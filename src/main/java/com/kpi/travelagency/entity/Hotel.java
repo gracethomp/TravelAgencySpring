@@ -8,19 +8,22 @@ import jakarta.persistence.*;
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
+    @Column(nullable = false,unique = true)
     private String name;
     private Double pricePerNight;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
     private HotelType type;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_city",nullable = false)
     private City id_city;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_country",nullable = false)
     private Country id_country;
     private Integer rating;
 
-    public Hotel(Integer id_hotel, String name, Double pricePerNight, HotelType type,
+    public Hotel(Long id_hotel, String name, Double pricePerNight, HotelType type,
                  City id_city, Country id_country, Integer rating) {
         this.id = id_hotel;
         this.name = name;
@@ -35,7 +38,7 @@ public class Hotel {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -71,7 +74,7 @@ public class Hotel {
         this.id_city = id_city;
     }
 
-    public void setId(Integer id_hotel) {
+    public void setId(Long id_hotel) {
         this.id = id_hotel;
     }
 
