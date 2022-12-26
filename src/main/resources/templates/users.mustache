@@ -41,21 +41,24 @@
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Name</th>
-        <th scope="col">email</th>
+        <th scope="col">Email</th>
         <th scope="col">Phone Number</th>
+        <th scope="col">Birthday</th>
         <th scope="col">Passport ID</th>
-        <th scope="col">Role</th>
     </tr>
     </thead>
     <tbody>
+    {{#users}}
         <tr>
-            <td>1111</td>
-            <td>John Doe</td>
-            <td>john_doe@email.com</td>
-            <td>+123456789</td>
-            <td>77788899</td>
-            <td>User</td>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{email}}</td>
+            <td>{{phoneNumber}}</td>
+            <td></td>
+            <td>{{passportID}}</td>
+            <td></td>
         </tr>
+     {{/users}}
     </tbody>
 </table>
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
