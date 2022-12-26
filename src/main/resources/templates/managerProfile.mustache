@@ -23,7 +23,7 @@
 <body id="page-top">
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left:20px; padding-right:20px;">
-        <a class="navbar-brand" href="home">Travel Agency</a>
+        <a class="navbar-brand" href="/home">Travel Agency</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,13 +32,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="tours">Tours<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/tours">Tours<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="logIn">Personal account<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/managerProfile">My profile<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/logIn">Log In<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/registration">Sign Up<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
@@ -123,12 +129,71 @@
                                     </table>
                                 </div>
 
-                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">View statistics</button>
-                                </div>
-
                             </div>
-
+                            <div class="col-md-10 col-lg-6 col-xl-4 d-flex align-items-center order-1 order-lg-2">
+                                <div class="table-responsive" style="margin-left:100px">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex  mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/editProfile'">Edit my profile</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/tours'">View tours</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Form a voucher</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/registration'">Create new client </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/registration'">Create new manager</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/editProfile'">Edit client profile</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/createTour'">Create new tour</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex mx-4 mb-3 mb-lg-4">
+                                                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">View statistics</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
