@@ -8,17 +8,21 @@ import jakarta.persistence.*;
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_hotel;
+    private Integer id;
     private String name;
     private Double pricePerNight;
     private HotelType type;
+    @OneToOne
+    @JoinColumn(name = "id_city",nullable = false)
     private City id_city;
+    @OneToOne
+    @JoinColumn(name = "id_country",nullable = false)
     private Country id_country;
     private Integer rating;
 
     public Hotel(Integer id_hotel, String name, Double pricePerNight, HotelType type,
                  City id_city, Country id_country, Integer rating) {
-        this.id_hotel = id_hotel;
+        this.id = id_hotel;
         this.name = name;
         this.pricePerNight = pricePerNight;
         this.type = type;
@@ -31,8 +35,8 @@ public class Hotel {
 
     }
 
-    public Integer getId_hotel() {
-        return id_hotel;
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -47,15 +51,10 @@ public class Hotel {
         return type;
     }
 
-    @OneToOne
-    @JoinColumn(name = "id_city",nullable = false)
     public City getId_city() {
         return id_city;
     }
 
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id_country",nullable = false)
     public Country getId_country() {
         return id_country;
     }
@@ -72,8 +71,8 @@ public class Hotel {
         this.id_city = id_city;
     }
 
-    public void setId_hotel(Integer id_hotel) {
-        this.id_hotel = id_hotel;
+    public void setId(Integer id_hotel) {
+        this.id = id_hotel;
     }
 
     public void setName(String name) {

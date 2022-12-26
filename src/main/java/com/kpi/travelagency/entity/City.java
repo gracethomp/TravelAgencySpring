@@ -2,17 +2,22 @@ package com.kpi.travelagency.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name="cities")
-public class City {
+public class City implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id_city;
+    private Integer id;
+    @Column(name = "name")
     private String name;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_country", nullable = false)
     private Country country;
 
     public City(Integer id_city, String name, Country country) {
-        this.id_city = id_city;
+        this.id = id_city;
         this.name = name;
         this.country = country;
     }
@@ -21,22 +26,20 @@ public class City {
 
     }
 
-    public Integer getId_city() {
-        return id_city;
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
-    @Id
-    @OneToOne
-    @JoinColumn(name = "id_country",nullable = false)
+
     public Country getCountry() {
         return country;
     }
 
-    public void setId_city(Integer id_city) {
-        this.id_city = id_city;
+    public void setId(Integer id_city) {
+        this.id = id_city;
     }
 
     public void setName(String name) {
@@ -50,7 +53,7 @@ public class City {
     @Override
     public String toString() {
         return "City{" +
-                "id_city=" + id_city +
+                "id_city=" + id +
                 ", name='" + name + '\'' +
                 '}';
     }
