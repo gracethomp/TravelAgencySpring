@@ -36,21 +36,21 @@ public class TourManagerController {
 
     @RequestMapping
     public String saveTour(@ModelAttribute("tour") Tour tour){
-        tourService.save(tour);
+        tourService.saveTour(tour);
         return "redirect:/";
     }
 
     @RequestMapping("toursManager/editTour/{id}")
     public ModelAndView showEditTourPage(@PathVariable(name="id") Long id){
         ModelAndView mav = new ModelAndView("new");
-        Optional<Tour> tour = tourService.get(id);
+        Optional<Tour> tour = tourService.getTourById(id);
         mav.addObject("tour",tour);
         return mav;
     }
 
     @RequestMapping("toursManager/deleteTour/{id}")
     public String deleteTour(@PathVariable(name="id") Long id){
-        tourService.delete(id);
+        tourService.deleteTourById(id);
         return "redirect:/";
     }
 }
