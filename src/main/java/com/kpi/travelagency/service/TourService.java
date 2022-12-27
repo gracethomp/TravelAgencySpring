@@ -1,6 +1,7 @@
 package com.kpi.travelagency.service;
 
 import com.kpi.travelagency.entity.Tour;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
