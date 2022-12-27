@@ -66,8 +66,8 @@
     <tbody>
     {{#tours}}
     <tr>
-        <td>{{id}}</td>
-        <td>{{name}}</td>
+        <td><a href="/toursManager/{{id}}">{{id}}</a></td>
+        <td><a href="/toursManager/{{id}}">{{name}}</a></td>
         <td>{{price}}</td>
         <td>{{startDate}}</td>
         <td>{{endDate}}</td>
@@ -80,10 +80,10 @@
             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='#'" style="margin-left:-20px; margin-right:-40px">Form a Voucher</button>
         </td>
         <td>
-            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='toursManager/editTour/{{id}}'" style="margin-left:-40px; margin-right:-20px">Edit tour</button>
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/{{id}}/editTour'" style="margin-left:-40px; margin-right:-20px">Edit tour</button>
         </td>
         <td>
-            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/deleteTour/{{id}}'" style="margin-left:-20px; margin-right:-40px">Delete tour</button>
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/{{id}}/delete'" style="margin-left:-20px; margin-right:-40px">Delete tour</button>
         </td>
     </tr>
     {{/tours}}
