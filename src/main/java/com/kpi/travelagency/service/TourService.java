@@ -1,39 +1,14 @@
 package com.kpi.travelagency.service;
 
 import com.kpi.travelagency.entity.Tour;
-import com.kpi.travelagency.repo.TourRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class TourService {
-    @Autowired
-    private TourRepository tourRepository;
-
-    /*public List<Tour> findAll(int pageNumber, int rowPerPage) {
-        List<Tour> tours = new ArrayList<>();
-        Pageable sortedByLastUpdateDesc = PageRequest.of(pageNumber - 1, rowPerPage,
-                Sort.by("id").ascending());
-        tourRepository.findAll(sortedByLastUpdateDesc);
-        return tours;
-    }*/
-    public List<Tour> findAll() {
-        List<Tour> tours = new ArrayList<>(tourRepository.findAll());
-        return tours;
-    }
-    
-    public void save(Tour tour){
-        tourRepository.save(tour);
-    }
-
-    public Optional<Tour> get(Long id){
-        return tourRepository.findById(id);
-    }
-
-    public void delete(Long id){
-        tourRepository.deleteById(id);
-    }
+public interface TourService {
+    Tour saveTour(Tour tour);
+    List<Tour> findAll();
+    Tour updateTour(Tour tour, Long tourId);
+    void deleteTourById(Long tourId);
+    Optional<Tour> getTourById(Long tourId);
 }
