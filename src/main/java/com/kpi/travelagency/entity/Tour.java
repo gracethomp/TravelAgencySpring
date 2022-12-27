@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Entity
 @Table(name="tours")
@@ -14,29 +15,34 @@ import java.time.LocalDate;
 public class Tour implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
+    @Column(nullable = false, unique = true)
     private String name;
     private Double price;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     @Column(name = "start_date")
     private LocalDate startDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Column(name = "end_date")
     private LocalDate endDate;
     private String description;
     private Integer duration;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_city",nullable = false)
     @JoinColumns(@JoinColumn(name = "id_country",nullable = false))
     private City id_city;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_country",nullable = false)
     private Country country;
     @OneToOne
     @JoinColumn(name = "id_hotel")
     private Hotel id_hotel;
+    @Column(name = "transport_type")
+    @Enumerated(EnumType.STRING)
     private TransportType transportType;
 
-    public Tour(Integer id, String name, Double price, LocalDate startDate,
+    public Tour(Long id, String name, Double price, LocalDate startDate,
                 LocalDate endDate, String description, Integer duration, City id_city,
                 Country id_country, Hotel id_hotel, TransportType transportType) {
         this.id = id;
@@ -56,7 +62,7 @@ public class Tour implements Serializable {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -124,7 +130,7 @@ public class Tour implements Serializable {
         this.endDate = endDate;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

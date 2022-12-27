@@ -49,6 +49,7 @@
         <th scope="col">Country</th>
         <th scope="col">Hotel</th>
         <th scope="col">Transport</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -57,13 +58,16 @@
         <td>{{id}}</td>
         <td>{{name}}</td>
         <td>{{price}}</td>
-        <td></td>
-        <td></td>
+        <td>{{startDate}}</td>
+        <td>{{endDate}}</td>
         <td>{{description}}</td>
         <td>{{id_city.name}}</td>
         <td>{{country.name}}</td>
         <td>{{id_hotel.name}}</td>
-
+        <td>{{transportType}}</td>
+        <td>
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='#'" style="margin-left:-20px; margin-right:-40px">Form a Voucher</button>
+        </td>
     </tr>
     {{/tours}}
     </tbody>
@@ -73,7 +77,7 @@
         <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
             <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
         </a>
-        <span class="text-muted">&copy; 2022 Company, Inc</span>
+        <span class="text-muted">&copy; 2021 Company, Inc</span>
     </div>
 </footer>
 </body>
