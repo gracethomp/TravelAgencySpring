@@ -29,11 +29,11 @@ public class Tour implements Serializable {
     private Integer duration;
 
     @ManyToOne
-    @JoinColumn(name = "id_city",nullable = false)
-    @JoinColumns(@JoinColumn(name = "id_country",nullable = false))
+    @JoinColumn(name = "id_city")
+    @JoinColumns(@JoinColumn(name = "id_country"))
     private City id_city;
     @ManyToOne
-    @JoinColumn(name = "id_country",nullable = false)
+    @JoinColumn(name = "id_country")
     private Country country;
     @OneToOne
     @JoinColumn(name = "id_hotel")
@@ -98,9 +98,9 @@ public class Tour implements Serializable {
         return country;
     }
 
-   /* public Hotel getId_hotel() {
+    public Hotel getId_hotel() {
         return id_hotel;
-    }*/
+    }
 
     public TransportType getTransportType() {
         return transportType;
