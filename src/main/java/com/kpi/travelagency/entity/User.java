@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Document(collection = "users")
 public class User {
@@ -16,16 +17,17 @@ public class User {
     private String name;
     private String email;
     private String phoneNumber;
+    private String birthDate;
     private String passportID;
 
 
-    public User(String id, String name, String email, String phoneNumber, String passportID) {
+    public User(String id, String name, String email, String phoneNumber, String passportID, String birthDate) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
         this.passportID = passportID;
-
     }
 
     public String getId() {
@@ -58,6 +60,14 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getPassportID() {
