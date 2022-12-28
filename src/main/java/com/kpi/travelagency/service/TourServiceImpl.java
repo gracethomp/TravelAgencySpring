@@ -2,6 +2,7 @@ package com.kpi.travelagency.service;
 
 import com.kpi.travelagency.entity.Tour;
 import com.kpi.travelagency.repo.TourRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,8 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public Tour findById(Long id){
-        return tourRepository.findById(id).orElse(null);
+        Tour tour = tourRepository.findById(id).orElse(null);
+        return tour;
     }
 
     @Override
