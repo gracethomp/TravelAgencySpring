@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Entity
 @Table(name="tours")
-@IdClass(City.class)
 public class Tour implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
