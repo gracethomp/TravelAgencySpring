@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface VoucherRepository extends Neo4jRepository<Voucher, Integer> {
     @Query("MATCH(n:Voucher{id:-1}) set n.id = ID(n) RETURN ID(n)")
     Integer setId();
-    @Query("MATCH (v:Voucher{id :#{#employer1.name}}), (e2:Employer {name: :#{#employer2.name}}) CREATE ((e1)-[f:friend{sourceEmployerName: :#{#employer1.name}, targetEmployer: :#{#employer2.name}}]->(e2))")
+    @Query("match (n:Voucher) with n match (e:User) where n.id = :#{#voucher.id} create (e)-[:issued]->(n)")
     void makeOrder(@Param("voucher") Voucher voucher, @Param("user") UserNode userNode);
 }

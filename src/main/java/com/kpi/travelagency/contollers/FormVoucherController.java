@@ -24,7 +24,7 @@ public class FormVoucherController {
         return "formVoucher";
     }
     @PostMapping("/formVoucher")
-    public String addVoucher(@RequestParam Integer id, @RequestParam Double totalPrice, Model model) {
+    public String addVoucher(@RequestParam Integer id, @RequestParam Double totalPrice, @RequestParam Integer user, Model model) {
         Voucher voucher = new Voucher();
         voucher.setTotalPrice(totalPrice);
         voucher.setStatus(Status.IN_PROGRESS);
@@ -32,9 +32,10 @@ public class FormVoucherController {
         voucherService.save(voucher);
         voucher.setId(voucherService.setRightID());
         UserNode userNode = new UserNode();
-        userNode.setId(id);
-        System.out.println(voucher);
+        userNode.setId(user);
+        System.out.println(userNode);
         userNodeService.save(userNode);
+        voucherService.makeRelationshipUserVoucher(voucher, userNode);
         return "home";
     }
 }
