@@ -1,8 +1,13 @@
 package com.kpi.travelagency.contollers;
 
+import com.kpi.travelagency.entity.City;
 import com.kpi.travelagency.entity.Country;
+import com.kpi.travelagency.entity.Hotel;
 import com.kpi.travelagency.entity.Tour;
+import com.kpi.travelagency.repo.HotelRepository;
+import com.kpi.travelagency.service.CityService;
 import com.kpi.travelagency.service.CountryService;
+import com.kpi.travelagency.service.HotelService;
 import com.kpi.travelagency.service.TourService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +28,12 @@ public class TourManagerController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     TourService tourService;
+    @Autowired
+    CountryService countryService;
+    @Autowired
+    CityService cityService;
+    @Autowired
+    HotelService hotelService;
 
 
     @GetMapping("/toursManager")
@@ -42,13 +53,19 @@ public class TourManagerController {
             model.addAttribute("errorMessage", ex.getMessage());
         }
         model.addAttribute("tour",tour);
-        return "tour";
+        return "viewTour";
     }
     @GetMapping("/toursManager/createTour")
     public String createTour(Model model){
         Tour tour = new Tour();
         model.addAttribute("add",true);
         model.addAttribute("tour",tour);
+        List<Country> countries = countryService.findAll();
+        List<City> cities = cityService.findAll();
+        List<Hotel> hotels = hotelService.findAll();
+        model.addAttribute("countries", countries);
+        model.addAttribute("cities", cities);
+        model.addAttribute("hotels", hotels);
         return "createTour";
     }
 
@@ -108,7 +125,7 @@ public class TourManagerController {
         }
         model.addAttribute("allowDelete",true);
         model.addAttribute("tour",tour);
-        return "tour";
+        return "viewTour";
     }
 
     @PostMapping(value = {"/toursManager/{id}/delete"})
@@ -121,9 +138,10 @@ public class TourManagerController {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
             model.addAttribute("errorMessage",errorMessage);
-            return "tour";
+            return "viewTour";
         }
     }
 
 
 }
+
