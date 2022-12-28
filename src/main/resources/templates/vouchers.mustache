@@ -74,8 +74,8 @@
             <div class="dropdown" style="margin-right: 100px">
                 <button class="dropbtn">Order by...</button>
                 <div class="dropdown-content">
-                    <a href="#">Price(asc)</a>
-                    <a href="#">Price(desc)</a>
+                    <a href="/vouchers/priceAsc">Price(asc)</a>
+                    <a href="/vouchers/priceDesc">Price(desc)</a>
                 </div>
             </div>
             <form class="form-inline my-2 my-lg-0">
@@ -98,7 +98,8 @@
     {{#vouchers}}
     <tr>
         <td>{{id}}</td>
-
+        <td></td>
+        <td></td>
         <td>{{totalPrice}}</td>
         <td>{{status}}</td>
     </tr>

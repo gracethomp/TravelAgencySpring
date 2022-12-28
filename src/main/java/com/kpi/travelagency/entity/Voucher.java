@@ -8,6 +8,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Node("Voucher")
@@ -17,18 +18,36 @@ public class Voucher {
     @Enumerated(EnumType.STRING)
     private Status status;
     @Property(name = "totalPrice")
-    private String totalPrice;
+    private Double totalPrice;
     @Property(name = "userEmail")
-    private String userEmail;
+    private String userID;
+    @Relationship("IS")
+    private List<UserNode> userNodes = new ArrayList<>();
     @Relationship(direction = Relationship.Direction.OUTGOING)
     private List<TourNode> tourNodes;
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void addUser(UserNode userNode) {
+        userNodes.add(userNode);
     }
 
-    public String getTotalPrice() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public Double getTotalPrice() {
         return totalPrice;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override
@@ -37,7 +56,7 @@ public class Voucher {
                 "id=" + id +
                 ", status=" + status +
                 ", totalPrice='" + totalPrice + '\'' +
-                ", userEmail='" + userEmail + '\'' +
+                ", userEmail='" + userID + '\'' +
                 ", tourNodes=" + tourNodes +
                 '}';
     }

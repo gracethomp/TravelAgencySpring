@@ -8,4 +8,8 @@ import org.springframework.data.neo4j.core.schema.Node;
 public class UserNode {
     @Id
     private Integer id;
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

@@ -15,7 +15,7 @@ public class HomeController {
     ) {
 
         model.put("name", name);
-        return "greeting";
+        return "home";
     }
 
     @GetMapping
