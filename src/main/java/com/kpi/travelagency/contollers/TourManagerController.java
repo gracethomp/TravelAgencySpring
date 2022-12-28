@@ -94,6 +94,37 @@ public class TourManagerController {
         }
         model.addAttribute("add",false);
         model.addAttribute("tour",tour);
+
+        //for listing and selecting countries / cities / hotels
+        List<Country> countries = countryService.findAll();
+        List<City> cities = cityService.findAll();
+        List<Hotel> hotels = hotelService.findAll();
+        model.addAttribute("countries", countries);
+        model.addAttribute("cities", cities);
+        model.addAttribute("hotels", hotels);
+
+        //for selecting transportation type
+        String type = String.valueOf(tour.getTransportType());
+        if (type=="BUS"){
+            model.addAttribute("bus", true);
+            model.addAttribute("train", false);
+            model.addAttribute("plane", false);
+        }
+        else if (type == "TRAIN"){
+            model.addAttribute("bus", false);
+            model.addAttribute("train", true);
+            model.addAttribute("plane", false);
+        }
+        else if (type == "PLANE"){
+            model.addAttribute("bus", false);
+            model.addAttribute("train", false);
+            model.addAttribute("plane", true);
+        }
+        else{
+            model.addAttribute("bus", false);
+            model.addAttribute("train", false);
+            model.addAttribute("plane", false);
+        }
         return "createTour";
     }
 
