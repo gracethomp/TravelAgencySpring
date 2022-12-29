@@ -42,7 +42,6 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success m-4 my-2 my-sm-0" type="submit" onclick="window.location.href='/voucher'" >Form a voucher</button>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="window.location.href='/createTour'">Create new tour</button>
             </form>
         </div>
@@ -55,10 +54,11 @@
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-5">
                             <div class="row justify-content-center">
-                                <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-1 mt-1">Voucher # ***********</p>
+                                <p class="text-center h1 fw-bold mb-4 mx-1 mx-md-1 mt-1">Voucher # {{uniqueOrderID}}</p>
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                                     <p class="text-center h4 fw-bold mb-3 mx-1 mx-md-1 mt-1">Tour details</p>
+                                    {{#tour}}
 
                                     <div class="table-responsive">
                                         <table class="table table-user-information">
@@ -71,7 +71,7 @@
                                                 </td>
 
                                                 <td class="text-primary">
-                                                    1
+                                                    {{id}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -81,7 +81,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    TestName
+                                                    {{name}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -91,7 +91,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    CountryName, CityName
+                                                    {{country.name}}, {{id_city.name}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -101,7 +101,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    2022-11-10 - 2022-12-10
+                                                    {{startDate}} - {{endDate}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -111,7 +111,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    30 days
+                                                    {{duration}} days
                                                 </td>
                                             </tr>
 
@@ -122,7 +122,7 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    Plane
+                                                    {{transportType}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -132,13 +132,13 @@
                                                     </strong>
                                                 </td>
                                                 <td class="text-primary">
-                                                    HotelName, adress
+                                                    {{id_hotel.name}}
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
-
+                                    {{/tour}}
                                 </div>
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
@@ -214,7 +214,7 @@
                                         </td>
                                         <td class="text-primary" >
                                             <input type=hidden name="totalPrice" value=10000>
-                                            <p class="text-center h4 fw-bold mb-3 mx-1 mx-md-1 mt-1">00.00 UAN</p>
+                                            <p class="text-center h4 fw-bold mb-3 mx-1 mx-md-1 mt-1">{{totalPriceVoucher}} UAN</p>
                                         </td>
                                     </tr>
                                     </tbody>

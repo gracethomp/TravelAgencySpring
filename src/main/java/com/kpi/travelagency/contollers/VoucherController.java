@@ -1,6 +1,7 @@
 package com.kpi.travelagency.contollers;
 
 import com.kpi.travelagency.constants.Status;
+import com.kpi.travelagency.entity.Tour;
 import com.kpi.travelagency.entity.TourNode;
 import com.kpi.travelagency.entity.UserNode;
 import com.kpi.travelagency.entity.Voucher;
@@ -71,6 +72,11 @@ public class VoucherController {
     @GetMapping("/vouchers/status/{id}")
     public String showSingleVoucher(@PathVariable Integer id, Model model){
         Voucher voucher = voucherService.getVoucherByID(id);
+        Integer tourID = voucherService.getTourByVaucher(voucher);
+        Tour tour = tourService.findById(Long.valueOf(tourID));
+        model.addAttribute("tour", tour);
+        model.addAttribute("totalPriceVoucher", tour.getPrice() + tour.getId_hotel().getPricePerNight());
+        model.addAttribute("uniqueOrderID", id);
         if(voucher.getStatus().equals(Status.ACCEPTED) || voucher.getStatus().equals(Status.CANCELLED))
             return "data";
         return "dataVoucher";
