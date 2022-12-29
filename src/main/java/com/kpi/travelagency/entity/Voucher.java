@@ -6,10 +6,6 @@ import jakarta.persistence.Enumerated;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
-import org.springframework.data.neo4j.core.schema.Relationship;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Node("Voucher")
 public class Voucher {
@@ -19,16 +15,7 @@ public class Voucher {
     private Status status;
     @Property(name = "totalPrice")
     private Double totalPrice;
-    @Property(name = "userEmail")
-    private String userID;
-    @Relationship("IS")
-    private List<UserNode> userNodes = new ArrayList<>();
-    @Relationship(direction = Relationship.Direction.OUTGOING)
-    private List<TourNode> tourNodes;
-
-    public void addUser(UserNode userNode) {
-        userNodes.add(userNode);
-    }
+    private String tourName;
 
     public Integer getId() {
         return id;
@@ -38,12 +25,12 @@ public class Voucher {
         this.id = id;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
     public Double getTotalPrice() {
         return totalPrice;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public void setStatus(Status status) {
@@ -54,14 +41,16 @@ public class Voucher {
         this.totalPrice = totalPrice;
     }
 
+    public void setTourName(String tourName) {
+        this.tourName = tourName;
+    }
+
     @Override
     public String toString() {
         return "Voucher{" +
                 "id=" + id +
                 ", status=" + status +
-                ", totalPrice='" + totalPrice + '\'' +
-                ", userEmail='" + userID + '\'' +
-                ", tourNodes=" + tourNodes +
+                ", totalPrice=" + totalPrice +
                 '}';
     }
 }

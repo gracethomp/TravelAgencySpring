@@ -8,4 +8,12 @@ import org.springframework.data.neo4j.core.schema.Node;
 public class TourNode {
     @Id
     private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

@@ -1,5 +1,7 @@
 package com.kpi.travelagency.service;
 
+import com.kpi.travelagency.constants.Status;
+import com.kpi.travelagency.entity.TourNode;
 import com.kpi.travelagency.entity.UserNode;
 import com.kpi.travelagency.entity.Voucher;
 import com.kpi.travelagency.repo.VoucherRepository;
@@ -31,5 +33,23 @@ public class VoucherService {
     }
     public void makeRelationshipUserVoucher(Voucher voucher, UserNode userNode) {
         voucherRepository.makeOrder(voucher, userNode);
+    }
+    public void makeRelationshipTourVoucher(Voucher voucher, TourNode tourNode) {
+        voucherRepository.connectVoucherTour(voucher, tourNode);
+    }
+    public List<Voucher> getVouchersByUserID(UserNode userNode) {
+        return voucherRepository.vouchersByUserID(userNode);
+    }
+    public List<Voucher> getVouchersByTourID(TourNode tourNode){
+        return  voucherRepository.vouchersByTourID(tourNode);
+    }
+    public Integer getTourByVaucher(Voucher voucher) {
+        return voucherRepository.getTourIdByVoucher(voucher).get(0);
+    }
+    public Voucher getVoucherByID(Integer id){
+        return voucherRepository.findById(id).get();
+    }
+    public void setStatus(Voucher voucher, Status status) {
+        voucherRepository.setStatus(status.name(), voucher);
     }
 }
