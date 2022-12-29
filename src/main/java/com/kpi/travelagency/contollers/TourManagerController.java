@@ -1,14 +1,8 @@
 package com.kpi.travelagency.contollers;
 
-import com.kpi.travelagency.entity.City;
-import com.kpi.travelagency.entity.Country;
-import com.kpi.travelagency.entity.Hotel;
-import com.kpi.travelagency.entity.Tour;
+import com.kpi.travelagency.entity.*;
 import com.kpi.travelagency.repo.HotelRepository;
-import com.kpi.travelagency.service.CityService;
-import com.kpi.travelagency.service.CountryService;
-import com.kpi.travelagency.service.HotelService;
-import com.kpi.travelagency.service.TourService;
+import com.kpi.travelagency.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +28,61 @@ public class TourManagerController {
     CityService cityService;
     @Autowired
     HotelService hotelService;
+    @Autowired
+    FilterTourService filterTourService;
 
 
     @GetMapping("/toursManager")
     public String tours(Model model) {
-        List<Tour> tours = tourService.findAll();
-        System.out.println(Arrays.toString(tours.toArray()));
+        FilterTourData data = new FilterTourData();
+        model.addAttribute("filterData",data);
+        List<Tour> toursAll = tourService.findAll();
+        List<Tour> filteredTours1 = tourService.findAllByCountry(toursAll, data.getCountry());
+        //List<Tour> filteredTours2 = tourService.findAllByCity(filteredTours1,data.getCity());
+        List<Tour> tours = filteredTours1;
         model.addAttribute("tours", tours);
         return "toursManager";
     }
+
+   /* @GetMapping("/toursManager")
+    public String toursFilter(Model model) {
+        List<Tour> tours = tourService.findAll();
+        model.addAttribute("tours", tours);
+        try {
+            FilterTourData data = filterTourService.findById(1L);
+            model.addAttribute("filterData",data);
+            List<Tour> toursAll = tourService.findAll();
+            List<Tour> filteredTours1 = tourService.findAllByCountry(toursAll, data.getCountry());
+            List<Tour> filteredTours2 = tourService.findAllByCity(filteredTours1,data.getCity());
+            //List<Tour> filteredTours3 = tourService.findAllBetweenDates(filteredTours2,data.getStartDate(),data.getEndDate());
+            //List<Tour> filteredTours4 = tourService.findAllByPriceRange(filteredTours3,data.getMinPrice(),data.getMaxPrice());
+            //List<Tour> filteredTours5 = tourService.findAllByTransportation(filteredTours4,data.getTransportType());
+            //List<Tour> filteredTours6 = tourService.findAllByHotelRating(filteredTours5,data.getHotelRating());
+            List<Tour> filteredTours = filteredTours2;
+            model.addAttribute("filteredTours", filteredTours);
+            model.addAttribute("filter",true);
+            return "redirect:/toursManager";
+        } catch (Exception ex) {
+            model.addAttribute("errorMessage", ex.getMessage());
+            return "toursManager";
+        }
+    }*/
+
+
+    @PostMapping("/toursManager")
+    public String saveFilterData(Model model,
+                                 @ModelAttribute("filterData") FilterTourData data) throws Exception {
+        try {
+            FilterTourData newData = filterTourService.saveData(data);
+            return "redirect:/toursManager";
+        } catch (Exception ex) {
+            String errorMessage = ex.getMessage();
+            logger.error(errorMessage);
+            model.addAttribute("errorMessage",errorMessage);
+            return "toursManager";
+        }
+    }
+
     @GetMapping(value = "/toursManager/{id}")
     public String getUserById(Model model, @PathVariable Long id){
         Tour tour = null;
@@ -55,6 +95,7 @@ public class TourManagerController {
         model.addAttribute("tour",tour);
         return "viewTour";
     }
+
     @GetMapping("/toursManager/createTour")
     public String createTour(Model model){
         Tour tour = new Tour();
@@ -175,4 +216,5 @@ public class TourManagerController {
 
 
 }
+
 
