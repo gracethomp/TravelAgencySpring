@@ -36,12 +36,39 @@
                     <a class="nav-link" href="/registration">Sign Up<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"> <a href="/createTour">Form a voucher</a></button>
+            </form>
         </div>
     </nav>
 </header>
 <div class="d-flex  mx-4 mb-3 mb-lg-4" style="margin-top:25px">
     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/createTour'">Create New Tour</button>
 </div>
+{{#filterData}}
+<form action="/toursManager" name="filterData" method="post">
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th colspan="9">Filter:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <td><input class="form-control" type="text" placeholder= "Country" name="country" value="{{#country}}{{country}}{{/country}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "City" name="city" value="{{#city}}{{city}}{{/city}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "Min price" name="startPrice" value="{{#minPrice}}{{minPrice}}{{/minPrice}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "Max price" name="endPrice" value="{{#maxPrice}}{{maxPrice}}{{/maxPrice}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "Start date" name="startDate" value="{{#startDate}}{{startDate}}{{/startDate}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "End date" name="endDate" value="{{#endDate}}{{endDate}}{{/endDate}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "Transport" name="transportType" value="{{#transportType}}{{transportType}}{{/transportType}}"/></td>
+            <td><input class="form-control" type="number" placeholder= "Hotel rating" name="hotelRating" value="{{#hotelRating}}{{hotelRating}}{{/hotelRating}}"/></td>
+            <td>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+            </td>
+        </tbody>
+    </table>
+</form>
+{{/filterData}}
 <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -96,3 +123,4 @@
 </footer>
 </body>
 </html>
+
