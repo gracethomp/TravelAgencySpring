@@ -7,6 +7,7 @@ import com.kpi.travelagency.entity.Voucher;
 import com.kpi.travelagency.repo.VoucherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,5 +52,11 @@ public class VoucherService {
     }
     public void setStatus(Voucher voucher, Status status) {
         voucherRepository.setStatus(status.name(), voucher);
+    }
+    public Integer getVoucherCountByTour(Integer id) {
+        return voucherRepository.getVoucherCountByTour(id);
+    }
+    public List<TourNode> getToursByVoucher(Voucher voucher){
+        return voucherRepository.getTourNodes(voucher);
     }
 }

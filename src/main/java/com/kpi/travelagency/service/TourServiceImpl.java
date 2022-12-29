@@ -1,11 +1,15 @@
 package com.kpi.travelagency.service;
 
+import com.kpi.travelagency.constants.TransportType;
+import com.kpi.travelagency.entity.City;
+import com.kpi.travelagency.entity.Country;
 import com.kpi.travelagency.entity.Tour;
 import com.kpi.travelagency.repo.TourRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +56,142 @@ public class TourServiceImpl implements TourService {
         }
         else {
             tourRepository.deleteById(id);
+        }
+    }
+
+
+    //for filters:
+    @Override
+    public List<Tour> findAllByCountry(List<Tour> tours, String country) {
+        List<Tour> filteredTours = null;
+        if(country==null){
+            return tours;
+        }
+        for (int i=0; i<tours.size();i++){
+            if (tours.get(i).getCountry().getName().toLowerCase()!=country.toLowerCase()){
+                //filteredTours.add(tours.get(i));
+                tours.remove(tours.get(i));
+            }
+        }
+        System.out.println(tours);
+        return tours;
+    }
+
+    @Override
+    public List<Tour> findAllByCity(List<Tour> tours, String city) {
+        List<Tour> filteredTours = null;
+        if(city==null){
+            return tours;
+        }
+        for (int i=0; i<tours.size();i++){
+            if (tours.get(i).getId_city().getName()!=city){
+                //filteredTours.add(tours.get(i));
+                tours.remove(tours.get(i));
+            }
+        }
+        return tours;
+    }
+
+    @Override
+    public List<Tour> findAllBetweenDates(List<Tour> tours, LocalDate startDate, LocalDate endDate) {
+        List<Tour> filteredTours = null;
+        if(startDate==null && endDate!=null){
+            for (int i=0; i<tours.size();i++){
+                LocalDate tourStartDate = tours.get(i).getStartDate();
+                LocalDate tourEndDate = tours.get(i).getEndDate();
+                Integer tourDuration = tours.get(i).getDuration();
+                if (endDate.isAfter(tourEndDate) || endDate.isEqual(tourEndDate)) {
+                    filteredTours.add(tours.get(i));
+                }
+            }
+            return filteredTours;
+        }
+        else if(startDate!=null && endDate==null){
+            for (int i=0; i<tours.size();i++){
+                LocalDate tourStartDate = tours.get(i).getStartDate();
+                LocalDate tourEndDate = tours.get(i).getEndDate();
+                Integer tourDuration = tours.get(i).getDuration();
+                if (startDate.isBefore(tourStartDate) ||startDate.isEqual(tourStartDate)){
+                    filteredTours.add(tours.get(i));
+                }
+            }
+            return filteredTours;
+        }
+        else if (startDate==null && endDate==null){
+            return tours;
+        }
+        else{
+            for (int i=0; i<tours.size();i++){
+                LocalDate tourStartDate = tours.get(i).getStartDate();
+                LocalDate tourEndDate = tours.get(i).getEndDate();
+                if ((startDate.isBefore(tourStartDate) ||startDate.isEqual(tourStartDate))
+                        && (endDate.isAfter(tourEndDate) || endDate.isEqual(tourEndDate))) {
+                    filteredTours.add(tours.get(i));
+                }
+            }
+            return filteredTours;
+        }
+    }
+
+    @Override
+    public List<Tour> findAllByTransportation(List<Tour> tours, String transportType) {
+        List<Tour> filteredTours = null;
+        if(transportType==null){
+            return tours;
+        }
+        for (int i=0; i<tours.size();i++){
+            if (tours.get(i).getTransportType().toString()==transportType){
+                filteredTours.add(tours.get(i));
+            }
+        }
+        return filteredTours;
+    }
+
+    @Override
+    public List<Tour> findAllByPriceRange(List<Tour> tours, Double startPrice, Double endPrice) {
+        List<Tour> filteredTours = null;
+        if(startPrice==null && endPrice==null){
+            return tours;
+        }
+        else if(startPrice==null && endPrice!=null){
+            for (int i=0; i<tours.size();i++){
+                if (tours.get(i).getPrice()<=endPrice){
+                    filteredTours.add(tours.get(i));
+                }
+            }
+            return filteredTours;
+        }
+        else if(startPrice!=null && endPrice==null){
+            for (int i=0; i<tours.size();i++){
+                if (tours.get(i).getPrice()>=startPrice){
+                    filteredTours.add(tours.get(i));
+                }
+            }
+            return filteredTours;
+        }
+        else{
+            for (int i=0; i<tours.size();i++){
+                if (tours.get(i).getPrice()>=startPrice && tours.get(i).getPrice()<=endPrice){
+                    filteredTours.add(tours.get(i));
+                }
+            }
+            return filteredTours;
+        }
+    }
+
+    @Override
+    public List<Tour> findAllByHotelRating(List<Tour> tours, Integer hotelRating) {
+        List<Tour> filteredTours = null;
+        if(hotelRating==null){
+            return tours;
+        }
+        else{
+            for (int i=0; i<tours.size();i++){
+                if (tours.get(i).getId_hotel().getRating()==hotelRating){
+                    filteredTours.add(tours.get(i));
+                }
+            }
+            return filteredTours;
         }
     }
 

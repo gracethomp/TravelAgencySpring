@@ -26,5 +26,8 @@ public interface VoucherRepository extends Neo4jRepository<Voucher, Integer> {
     List<Integer> getTourIdByVoucher(@Param("voucher") Voucher voucher);
     @Query("match (v:Voucher) where v.id = :#{#voucher.id} set v.status = :#{#status}")
     void setStatus(@Param("status") String status, @Param("voucher") Voucher voucher);
-
+    @Query("match (n:Tour)-[:ordered_here]-(u:Voucher) where n.id = :#{#tourID} return count(u)")
+    Integer getVoucherCountByTour(@Param("tourID") Integer tourID);
+    @Query("match (n:Tour)-[:ordered_here]-(u:Voucher) where u.id = :#{#voucher.id} return n")
+    List<TourNode> getTourNodes(@Param("voucher") Voucher voucher);
 }
