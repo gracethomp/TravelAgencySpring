@@ -30,6 +30,10 @@ public class User {
         this.passportID = passportID;
     }
 
+    public User(){
+
+    }
+
     public String getId() {
         return id;
     }
@@ -77,7 +81,5 @@ public class User {
     public void setPassportID(String passportID) {
         this.passportID = passportID;
     }
-
-
 
 }

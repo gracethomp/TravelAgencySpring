@@ -33,6 +33,9 @@
         </div>
     </nav>
 </header>
+<div class="d-flex  mx-4 mb-3 mb-lg-4" style="margin-top:25px">
+    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/signUp'">Add New Profile</button>
+</div>
 <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -42,6 +45,8 @@
         <th scope="col">Phone Number</th>
         <th scope="col">Birthday</th>
         <th scope="col">Passport ID</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -53,6 +58,12 @@
             <td>{{phoneNumber}}</td>
             <td>{{birthDate}}</td>
             <td>{{passportID}}</td>
+            <td>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/users/{{id}}/editProfile'" style="margin-left:-40px; margin-right:-20px">Edit profile</button>
+            </td>
+            <td>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/users/{{id}}/delete'" style="margin-left:-20px; margin-right:-40px" >Delete profile</button>
+            </td>
         </tr>
      {{/users}}
     </tbody>

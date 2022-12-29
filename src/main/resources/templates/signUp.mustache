@@ -18,7 +18,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
             rel="stylesheet"
     />
-    <title>Edit profile</title>
+    <title>{{#add}}Sign up{{/add}}{{^add}}Edit Profile{{/add}}</title>
 </head>
 <body id="page-top">
 
@@ -55,49 +55,50 @@
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Edit profile</p>
-                                <form class="mx-1 mx-md-4">
+                                {{#user}}
+                                <form action="{{#add}}/signUp{{/add}}{{^add}}/users/{{id}}/editProfile{{/add}}" name="user" method="post">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{#add}}Sign up{{/add}}{{^add}}Edit Profile{{/add}}</p>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="d-flex flex-row row mb-4">
                                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                        <div class="form flex-fill mb-0">
-                                            <input type="text" id="form3Example1c" class="form-control" placeholder="Your Name"/>
+                                        <div class="form">
+                                            <input type="text" id="form3Example1n" class="form-control" placeholder= "Name" name="name" value="{{#name}}{{name}}{{/name}}"/>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="row mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                        <div class="form flex-fill mb-0">
-                                            <input type="email" id="form3Example3c" class="form-control" placeholder="Your Email"/>
+                                        <div class="form">
+                                            <input type="email" id="form3Example3c" class="form-control" placeholder="Email" name="email" value="{{#email}}{{email}}{{/email}}"/>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="row mb-4">
                                         <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
-                                        <div class="form flex-fill mb-0">
-                                            <input type="tel" id="form3Example4c" class="form-control" placeholder="Your phone Number"/>
+                                        <div class="form mb-0">
+                                            <input type="tel" id="form3Example4c" class="form-control" placeholder="Phone number" name="phoneNumber" value="{{#phoneNumber}}{{phoneNumber}}{{/phoneNumber}}"/>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="row mb-4">
                                         <i class="fas fa-calendar-alt fa-lg me-3 fa-fw"></i>
-                                        <div class="form flex-fill mb-0">
-                                            <input type="date" id="form3Example4c" class="form-control" placeholder="Your date of birth"/>
+                                        <div class="form mb-0">
+                                            <input type="date" id="form3Example4c" class="form-control" placeholder="Date of birth" name="birthDate" value="{{#birthDate}}{{birthDate}}{{/birthDate}}"/>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="row mb-4">
                                         <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
-                                        <div class="form flex-fill mb-0">
-                                            <input type="text" id="form3Example4c" class="form-control" placeholder="Your passport ID"/>
+                                        <div class="form mb-0">
+                                            <input type="text" id="form3Example4c" class="form-control" placeholder="Passport ID" name="passportID" value="{{#passportID}}{{passportID}}{{/passportID}}"/>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center m-4 mx-4 mb-3 mb-lg-4">
-                                        <button class="btn btn-outline-success m-4 my-2 my-sm-0" type="button">Save edit</button>
-                                        <button class="btn btn-outline-success m-4 my-2 my-sm-0" type="button">Cancel edit</button>
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{#add}}Create{{/add}}{{^add}}Update{{/add}}</button>
                                     </div>
                                 </form>
+                                {{/user}}
                             </div>
                         </div>
                     </div>
@@ -106,7 +107,7 @@
         </div>
     </div>
 </section>
-
+<div class="error">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</div>
 <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <div class="col-md-4 d-flex align-items-center">
         <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
