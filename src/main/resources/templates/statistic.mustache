@@ -65,12 +65,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {{#vouchers}}
+                                    {{#tours}}
                                     <tr>
-                                        <th scope="row">{{tourName}}</th>
-                                        <td>Mark</td>
+                                        <th scope="row">{{name}}</th>
+                                        <td>{{count}}</td>
                                     </tr>
-                                    {{/vouchers}}
+                                    {{/tours}}
                                     </tbody>
                                 </table>
                             </div>
@@ -84,10 +84,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                    </tr>
+                                    {{#tours1}}
+                                        <tr>
+                                            <th scope="row">{{name}}</th>
+                                            <td>{{count}}</td>
+                                        </tr>
+                                    {{/tours1}}
                                     </tbody>
                                 </table>
                             </div>

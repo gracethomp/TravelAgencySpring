@@ -75,10 +75,12 @@ public class VoucherController {
         Integer tourID = voucherService.getTourByVaucher(voucher);
         Tour tour = tourService.findById(Long.valueOf(tourID));
         model.addAttribute("tour", tour);
-        model.addAttribute("totalPriceVoucher", tour.getPrice() + tour.getId_hotel().getPricePerNight());
+        model.addAttribute("totalPriceVoucher", tour.getPrice()
+                + tour.getId_hotel().getPricePerNight());
         model.addAttribute("uniqueOrderID", id);
+        model.addAttribute("add", true);
         if(voucher.getStatus().equals(Status.ACCEPTED) || voucher.getStatus().equals(Status.CANCELLED))
-            return "data";
+            model.addAttribute("add", false);
         return "dataVoucher";
     }
     @PostMapping("/vouchers/status/{id}/accept")
