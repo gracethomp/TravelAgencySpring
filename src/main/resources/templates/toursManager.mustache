@@ -86,6 +86,7 @@
         <th scope="col">Hotel</th>
         <th scope="col">Transport</th>
         <th scope="col"></th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -102,8 +103,12 @@
         <td>{{id_hotel.name}}</td>
         <td>{{transportType}}</td>
         <td>
-            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='#'" style="margin-left:-20px; margin-right:-40px">Form a Voucher</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="window.location.href='/formVoucher/{{id}}'" style="margin-left:-20px; margin-right:-40px">Form a Voucher</button>
         </td>
+        <td>
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/{{id}}'" style="margin-left:-20px; margin-right:-40px">View details</button>
+        </td>
+
     </tr>
     {{/tours}}
     </tbody>
@@ -118,4 +123,3 @@
 </footer>
 </body>
 </html>
-
