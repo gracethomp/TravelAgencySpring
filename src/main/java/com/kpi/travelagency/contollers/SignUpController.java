@@ -43,9 +43,13 @@ public class SignUpController {
                                 @PathVariable String id,
                                 @ModelAttribute("user") User user){
         try{
-            user.setId(id);
-            userService.updateProfile(user);
-            return "redirect:/users";
+            User user1 = userService.findUserByID(id);
+            user1.setId(id);
+            userService.updateProfile(user1);
+           // user.setId(id);
+           // userService.updateProfile(user);
+            model.addAttribute("user", user1);
+            return "userProfile";
         } catch (Exception ex){
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
