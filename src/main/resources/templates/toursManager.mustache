@@ -50,24 +50,27 @@
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th colspan="9">Filter:</th>
+                <th colspan="10">Filter:</th>
             </tr>
         </thead>
         <tbody>
             <td><input class="form-control" type="text" placeholder= "Country" name="country" value="{{#country}}{{country}}{{/country}}"/></td>
             <td><input class="form-control" type="text" placeholder= "City" name="city" value="{{#city}}{{city}}{{/city}}"/></td>
-            <td><input class="form-control" type="text" placeholder= "Min price" name="startPrice" value="{{#minPrice}}{{minPrice}}{{/minPrice}}"/></td>
-            <td><input class="form-control" type="text" placeholder= "Max price" name="endPrice" value="{{#maxPrice}}{{maxPrice}}{{/maxPrice}}"/></td>
-            <td><input class="form-control" type="text" placeholder= "Start date" name="startDate" value="{{#startDate}}{{startDate}}{{/startDate}}"/></td>
-            <td><input class="form-control" type="text" placeholder= "End date" name="endDate" value="{{#endDate}}{{endDate}}{{/endDate}}"/></td>
+            <td><input class="form-control" type="number" placeholder= "Min price" name="startPrice" min="0"  value="{{#startPrice}}{{startPrice}}{{/startPrice}}"/></td>
+            <td><input class="form-control" type="number" placeholder= "Max price" name="endPrice" min="0" value="{{#endPrice}}{{endPrice}}{{/endPrice}}"/></td>
+            <td><input class="form-control" type="date" placeholder= "Start date" name="startDate" value="{{#startDate}}{{startDate}}{{/startDate}}"/></td>
+            <td><input class="form-control" type="date" placeholder= "End date" name="endDate" value="{{#endDate}}{{endDate}}{{/endDate}}"/></td>
             <td><input class="form-control" type="text" placeholder= "Transport" name="transportType" value="{{#transportType}}{{transportType}}{{/transportType}}"/></td>
-            <td><input class="form-control" type="number" placeholder= "Hotel rating" name="hotelRating" value="{{#hotelRating}}{{hotelRating}}{{/hotelRating}}"/></td>
+            <td><input class="form-control" type="number" placeholder= "Hotel rating" name="hotelRating" min="1" max="5" value="{{#hotelRating}}{{hotelRating}}{{/hotelRating}}"/></td>
             <td>
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Input</button>
+            </td>
+        </form>
+            <td>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="window.location.href='/toursManager/filtered/{{#id}}{{id}}{{/id}}'">Search</button>
             </td>
         </tbody>
     </table>
-</form>
 {{/filterData}}
 <table class="table">
     <thead class="thead-dark">
@@ -82,8 +85,6 @@
         <th scope="col">Country</th>
         <th scope="col">Hotel</th>
         <th scope="col">Transport</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -102,12 +103,6 @@
         <td>{{transportType}}</td>
         <td>
             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='#'" style="margin-left:-20px; margin-right:-40px">Form a Voucher</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/{{id}}/editTour'" style="margin-left:-40px; margin-right:-20px">Edit tour</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/{{id}}/delete'" style="margin-left:-20px; margin-right:-40px">Delete tour</button>
         </td>
     </tr>
     {{/tours}}
