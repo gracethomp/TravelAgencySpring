@@ -42,9 +42,6 @@
         </div>
     </nav>
 </header>
-<div class="d-flex  mx-4 mb-3 mb-lg-4" style="margin-top:25px">
-    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/createTour'">Create New Tour</button>
-</div>
 {{#filterData}}
     <table class="table">
         <thead class="thead-dark">
@@ -52,7 +49,7 @@
                 <th colspan="10">Filter:</th>
             </tr>
         </thead>
-        <form action="/toursManager" name="filterData" method="post">
+        <form action="/tours" name="filterData" method="post">
         <tbody>
             <td><input class="form-control" type="text" placeholder= "Country" name="country" value="{{#country}}{{country}}{{/country}}"/></td>
             <td><input class="form-control" type="text" placeholder= "City" name="city" value="{{#city}}{{city}}{{/city}}"/></td>
@@ -67,7 +64,7 @@
             </td>
         </form>
             <td>
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="window.location.href='/toursManager/filtered/{{#id}}{{id}}{{/id}}'">Search</button>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="window.location.href='/tours/filtered/{{#id}}{{id}}{{/id}}'">Search</button>
             </td>
         </tbody>
     </table>
@@ -86,14 +83,13 @@
         <th scope="col">Hotel</th>
         <th scope="col">Transport</th>
         <th scope="col"></th>
-        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     {{#tours}}
     <tr>
-        <td><a href="/toursManager/{{id}}">{{id}}</a></td>
-        <td><a href="/toursManager/{{id}}">{{name}}</a></td>
+        <td>{{id}}</td>
+        <td>{{name}}</td>
         <td>{{price}}</td>
         <td>{{startDate}}</td>
         <td>{{endDate}}</td>
@@ -104,9 +100,6 @@
         <td>{{transportType}}</td>
         <td>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="window.location.href='/formVoucher/{{id}}'" style="margin-left:-20px; margin-right:-40px">Form a Voucher</button>
-        </td>
-        <td>
-            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/{{id}}'" style="margin-left:-20px; margin-right:-40px">View details</button>
         </td>
     </tr>
     {{/tours}}
@@ -122,5 +115,4 @@
 </footer>
 </body>
 </html>
-
 
