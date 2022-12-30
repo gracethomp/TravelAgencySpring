@@ -63,43 +63,39 @@ public class TourServiceImpl implements TourService {
     //for filters:
     @Override
     public List<Tour> findAllByCountry(List<Tour> tours, String country) {
-        List<Tour> filteredTours = null;
-        if(country==null){
+        List<Tour> filteredTours = new ArrayList<>();
+        if(country==null || country.equals("")){
             return tours;
         }
         for (int i=0; i<tours.size();i++){
-            if (tours.get(i).getCountry().getName().toLowerCase()!=country.toLowerCase()){
-                //filteredTours.add(tours.get(i));
-                tours.remove(tours.get(i));
+            if (tours.get(i).getCountry().getName().toUpperCase().equals(country.toUpperCase())==true){
+                filteredTours.add(tours.get(i));
             }
         }
-        System.out.println(tours);
-        return tours;
+        return  filteredTours;
     }
 
     @Override
     public List<Tour> findAllByCity(List<Tour> tours, String city) {
-        List<Tour> filteredTours = null;
-        if(city==null){
+        List<Tour> filteredTours = new ArrayList<>();
+        if(city==null || city.equals("")){
             return tours;
         }
         for (int i=0; i<tours.size();i++){
-            if (tours.get(i).getId_city().getName()!=city){
-                //filteredTours.add(tours.get(i));
-                tours.remove(tours.get(i));
+            if (tours.get(i).getId_city().getName().toUpperCase().equals(city.toUpperCase())==true){
+                filteredTours.add(tours.get(i));
             }
         }
-        return tours;
+        return filteredTours;
     }
 
     @Override
     public List<Tour> findAllBetweenDates(List<Tour> tours, LocalDate startDate, LocalDate endDate) {
-        List<Tour> filteredTours = null;
+        List<Tour> filteredTours = new ArrayList<>();
         if(startDate==null && endDate!=null){
             for (int i=0; i<tours.size();i++){
                 LocalDate tourStartDate = tours.get(i).getStartDate();
                 LocalDate tourEndDate = tours.get(i).getEndDate();
-                Integer tourDuration = tours.get(i).getDuration();
                 if (endDate.isAfter(tourEndDate) || endDate.isEqual(tourEndDate)) {
                     filteredTours.add(tours.get(i));
                 }
@@ -110,7 +106,6 @@ public class TourServiceImpl implements TourService {
             for (int i=0; i<tours.size();i++){
                 LocalDate tourStartDate = tours.get(i).getStartDate();
                 LocalDate tourEndDate = tours.get(i).getEndDate();
-                Integer tourDuration = tours.get(i).getDuration();
                 if (startDate.isBefore(tourStartDate) ||startDate.isEqual(tourStartDate)){
                     filteredTours.add(tours.get(i));
                 }
@@ -118,6 +113,9 @@ public class TourServiceImpl implements TourService {
             return filteredTours;
         }
         else if (startDate==null && endDate==null){
+            return tours;
+        }
+        else if (startDate.toString().equals("") && endDate.toString().equals("")){
             return tours;
         }
         else{
@@ -135,12 +133,12 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public List<Tour> findAllByTransportation(List<Tour> tours, String transportType) {
-        List<Tour> filteredTours = null;
-        if(transportType==null){
+        List<Tour> filteredTours = new ArrayList<>();
+        if(transportType==null || transportType.equals("")){
             return tours;
         }
         for (int i=0; i<tours.size();i++){
-            if (tours.get(i).getTransportType().toString()==transportType){
+            if (tours.get(i).getTransportType().toString().equals(transportType.toUpperCase())==true){
                 filteredTours.add(tours.get(i));
             }
         }
@@ -149,7 +147,7 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public List<Tour> findAllByPriceRange(List<Tour> tours, Double startPrice, Double endPrice) {
-        List<Tour> filteredTours = null;
+        List<Tour> filteredTours = new ArrayList<>();
         if(startPrice==null && endPrice==null){
             return tours;
         }
@@ -181,7 +179,7 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public List<Tour> findAllByHotelRating(List<Tour> tours, Integer hotelRating) {
-        List<Tour> filteredTours = null;
+        List<Tour> filteredTours = new ArrayList<>();
         if(hotelRating==null){
             return tours;
         }
@@ -204,3 +202,4 @@ public class TourServiceImpl implements TourService {
             return tours;
         }*/
 }
+
