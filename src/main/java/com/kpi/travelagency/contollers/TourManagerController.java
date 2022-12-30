@@ -36,37 +36,31 @@ public class TourManagerController {
     public String tours(Model model) {
         FilterTourData data = new FilterTourData();
         model.addAttribute("filterData",data);
-        List<Tour> toursAll = tourService.findAll();
-        List<Tour> filteredTours1 = tourService.findAllByCountry(toursAll, data.getCountry());
-        //List<Tour> filteredTours2 = tourService.findAllByCity(filteredTours1,data.getCity());
-        List<Tour> tours = filteredTours1;
+        List<Tour> tours = tourService.findAll();
         model.addAttribute("tours", tours);
         return "toursManager";
     }
 
-   /* @GetMapping("/toursManager")
-    public String toursFilter(Model model) {
-        List<Tour> tours = tourService.findAll();
-        model.addAttribute("tours", tours);
+    @GetMapping("/toursManager/filtered/{id}")
+    public String toursFilter(Model model, @PathVariable("id") Long id) {
         try {
-            FilterTourData data = filterTourService.findById(1L);
+            FilterTourData data = filterTourService.findById(id);
             model.addAttribute("filterData",data);
             List<Tour> toursAll = tourService.findAll();
             List<Tour> filteredTours1 = tourService.findAllByCountry(toursAll, data.getCountry());
             List<Tour> filteredTours2 = tourService.findAllByCity(filteredTours1,data.getCity());
-            //List<Tour> filteredTours3 = tourService.findAllBetweenDates(filteredTours2,data.getStartDate(),data.getEndDate());
-            //List<Tour> filteredTours4 = tourService.findAllByPriceRange(filteredTours3,data.getMinPrice(),data.getMaxPrice());
-            //List<Tour> filteredTours5 = tourService.findAllByTransportation(filteredTours4,data.getTransportType());
-            //List<Tour> filteredTours6 = tourService.findAllByHotelRating(filteredTours5,data.getHotelRating());
-            List<Tour> filteredTours = filteredTours2;
-            model.addAttribute("filteredTours", filteredTours);
-            model.addAttribute("filter",true);
-            return "redirect:/toursManager";
+            List<Tour> filteredTours3 = tourService.findAllByTransportation(filteredTours2,data.getTransportType());
+            List<Tour> filteredTours4 = tourService.findAllByHotelRating(filteredTours3,data.getHotelRating());
+            List<Tour> filteredTours5 = tourService.findAllByPriceRange(filteredTours4, data.getStartPrice(), data.getEndPrice());
+            List<Tour> filteredTours6 =tourService.findAllBetweenDates(filteredTours5,data.getStartDate(),data.getEndDate());
+            List<Tour> tours = filteredTours6;
+            model.addAttribute("tours", tours);
+            return "toursManager";
         } catch (Exception ex) {
             model.addAttribute("errorMessage", ex.getMessage());
             return "toursManager";
         }
-    }*/
+    }
 
 
     @PostMapping("/toursManager")
@@ -74,7 +68,9 @@ public class TourManagerController {
                                  @ModelAttribute("filterData") FilterTourData data) throws Exception {
         try {
             FilterTourData newData = filterTourService.saveData(data);
-            return "redirect:/toursManager";
+            List<Tour> tours = tourService.findAll();
+            model.addAttribute("tours", tours);
+            return "toursManager";
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
@@ -216,5 +212,4 @@ public class TourManagerController {
 
 
 }
-
 
