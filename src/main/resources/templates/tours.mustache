@@ -33,6 +33,33 @@
         </div>
     </nav>
 </header>
+{{#filterData}}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th colspan="10">Filter:</th>
+        </tr>
+        </thead>
+        <form action="/tours" name="filterData" method="post">
+            <tbody>
+            <td><input class="form-control" type="text" placeholder= "Country" name="country" value="{{#country}}{{country}}{{/country}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "City" name="city" value="{{#city}}{{city}}{{/city}}"/></td>
+            <td><input class="form-control" type="number" placeholder= "Min price" name="startPrice" min="0"  value="{{#startPrice}}{{startPrice}}{{/startPrice}}"/></td>
+            <td><input class="form-control" type="number" placeholder= "Max price" name="endPrice" min="0" value="{{#endPrice}}{{endPrice}}{{/endPrice}}"/></td>
+            <td><input class="form-control" type="date" placeholder= "Start date" name="startDate" value="{{#startDate}}{{startDate}}{{/startDate}}"/></td>
+            <td><input class="form-control" type="date" placeholder= "End date" name="endDate" value="{{#endDate}}{{endDate}}{{/endDate}}"/></td>
+            <td><input class="form-control" type="text" placeholder= "Transport" name="transportType" value="{{#transportType}}{{transportType}}{{/transportType}}"/></td>
+            <td><input class="form-control" type="number" placeholder= "Hotel rating" name="hotelRating" min="1" max="5" value="{{#hotelRating}}{{hotelRating}}{{/hotelRating}}"/></td>
+            <td>
+                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Input</button>
+            </td>
+        </form>
+        <td>
+            <button class="btn btn-outline-dark my-2 my-sm-0" type="button" onclick="window.location.href='/tours/filtered/{{#id}}{{id}}{{/id}}'">Search</button>
+        </td>
+        </tbody>
+    </table>
+{{/filterData}}
 <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -63,7 +90,7 @@
         <td>{{id_hotel.name}}</td>
         <td>{{transportType}}</td>
         <td>
-            <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='#'" style="margin-left:-20px; margin-right:-40px"><a href="/formVoucher/{{id}}">Form a Voucher</a></button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="window.location.href='/formVoucher/{{id}}'" style="margin-left:-20px; margin-right:-40px">Form a Voucher</button>
         </td>
     </tr>
     {{/tours}}
@@ -79,3 +106,4 @@
 </footer>
 </body>
 </html>
+
