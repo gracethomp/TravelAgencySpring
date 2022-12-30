@@ -46,7 +46,6 @@
     <button class="btn btn-outline-dark my-2 my-sm-0" type="submit" onclick="window.location.href='/toursManager/createTour'">Create New Tour</button>
 </div>
 {{#filterData}}
-<form action="/toursManager" name="filterData" method="post">
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -54,6 +53,7 @@
             </tr>
         </thead>
         <tbody>
+        <form action="/toursManager" name="filterData" method="post">
             <td><input class="form-control" type="text" placeholder= "Country" name="country" value="{{#country}}{{country}}{{/country}}"/></td>
             <td><input class="form-control" type="text" placeholder= "City" name="city" value="{{#city}}{{city}}{{/city}}"/></td>
             <td><input class="form-control" type="number" placeholder= "Min price" name="startPrice" min="0"  value="{{#startPrice}}{{startPrice}}{{/startPrice}}"/></td>
