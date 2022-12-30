@@ -4,6 +4,7 @@ package com.kpi.travelagency.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kpi.travelagency.constants.TransportType;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,9 +20,11 @@ public class Tour implements Serializable {
     private String name;
     private Double price;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "start_date")
     private LocalDate startDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "end_date")
     private LocalDate endDate;
     private String description;
