@@ -53,32 +53,23 @@
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Log in</p>
-                                <form class="mx-1 mx-md-4">
+                                <form action="{{#add}}/logIn{{/add}}" name="email" method="POST">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{#add}}Log in{{/add}}</p>
 
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                         <div class="form flex-fill mb-0">
-                                            <input type="email" id="form3Example3c" class="form-control" placeholder="Your Email"/>
-                                        </div>
-                                    </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
-                                        <div class="form flex-fill mb-0">
-                                            <input type="password" id="form3Example4c" class="form-control" placeholder="Password"/>
+                                            <input type="email" id="form3Example3c" class="form-control" placeholder="Email" name="email" value="{{#email}}{{email}}{{/email}}"/>
                                         </div>
                                     </div>
 
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                        <button class="btn btn-outline-success my-2 my-sm-0" type="button">Log in</button>
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{#add}}Log in{{/add}}</button>
                                     </div>
 
                                     <p class="text-center p mb-5 mx-1 mx-md-4 mt-4">
-                                        Don't have an account? <a href="registration">Sign up</a>
+                                        Don't have an account? <a href="signUp">Sign up</a>
                                     </p>
-
                                 </form>
                             </div>
                         </div>

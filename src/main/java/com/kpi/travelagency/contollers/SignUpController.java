@@ -1,6 +1,7 @@
 package com.kpi.travelagency.contollers;
 
 import com.kpi.travelagency.entity.*;
+import com.kpi.travelagency.repo.UserRepository;
 import com.kpi.travelagency.service.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,11 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class SignUpController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/signUp")
     public String signUp(Model model){
@@ -28,28 +33,37 @@ public class SignUpController {
                           @ModelAttribute("user") User user) throws Exception {
         try {
             User newUser = userService.saveUser(user);
-            return "redirect:/users";
+            return "redirect:/users/" + newUser.getId();
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
-            model.addAttribute("errorMessage",errorMessage);
+            model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("add",true);
             return "signUp";
         }
     }
 
-    @RequestMapping(value = {"/users/{id}/editProfile"}, method = { RequestMethod.GET, RequestMethod.POST })
+    @GetMapping(value = {"/users/{id}/editProfile"})
+    public String showUpdateProfile(Model model, @PathVariable String id) {
+        User user = null;
+        try {
+            user = userService.findUserByID(id);
+        } catch (Exception ex){
+            model.addAttribute("errorMessage", ex.getMessage());
+        }
+        model.addAttribute("add",false);
+        model.addAttribute("user", user);
+        return "signUp";
+    }
+
+    @PostMapping(value = {"/users/{id}/editProfile"})
     public String updateProfile(Model model,
                                 @PathVariable String id,
                                 @ModelAttribute("user") User user){
         try{
-            User user1 = userService.findUserByID(id);
-            user1.setId(id);
-            userService.updateProfile(user1);
-           // user.setId(id);
-           // userService.updateProfile(user);
-            model.addAttribute("user", user1);
-            return "userProfile";
+            user.setId(id);
+            userService.updateProfile(user);
+            return "redirect:/users";
         } catch (Exception ex){
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
