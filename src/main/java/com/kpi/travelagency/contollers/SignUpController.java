@@ -33,7 +33,7 @@ public class SignUpController {
                           @ModelAttribute("user") User user) throws Exception {
         try {
             User newUser = userService.saveUser(user);
-            return "redirect:/users/" + newUser.getId();
+            return "redirect:/users";
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);

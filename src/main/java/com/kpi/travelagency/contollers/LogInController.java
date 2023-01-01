@@ -29,7 +29,7 @@ public class LogInController {
         User user = new User();
         model.addAttribute("add",true);
         model.addAttribute("email", user.getEmail());
-        return "/logIn";
+        return "logIn";
     }
 
     @PostMapping("/logIn")
@@ -42,7 +42,8 @@ public class LogInController {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
             model.addAttribute("errorMessage", errorMessage);
-            return "/home";
+            model.addAttribute("add",true);
+            return "logIn";
         }
     }
 

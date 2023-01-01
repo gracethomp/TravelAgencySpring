@@ -31,7 +31,7 @@ public class UserService {
             throw new Exception("User with id: " + user.getId() + " already exists");
         }
         if(userRepository.findByEmail(user.getEmail())){
-            throw new Exception("User with email: " + user.getEmail() + " already exists");
+            throw new Exception("User with email: " + user.getEmail() + " already exists. Try another email!");
         }
         return userRepository.save(user);
     }
@@ -65,7 +65,7 @@ public class UserService {
 
     public User logIn(String email) throws Exception{
         if(!findByEmail(email)) {
-            throw new Exception("Cannot find user with email: " + email);
+            throw new Exception("Cannot find user with email: " + email + ". Try again!");
         }
         else {
             return userRepository.findUserByEmail(email);
