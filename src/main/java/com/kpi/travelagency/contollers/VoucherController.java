@@ -50,10 +50,10 @@ public class VoucherController {
         return "vouchers";
     }
     @GetMapping("/vouchers/{id}")
-    public String showByUser(@PathVariable Integer id, Model model){
+    public String showByUser(@PathVariable String id, Model model){
         UserNode userNode = new UserNode();
         userNode.setId(id);
-        List<Voucher> vouchers = voucherService.getVouchers();
+        List<Voucher> vouchers = voucherService.getVouchersByUserID(userNode);
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
         }

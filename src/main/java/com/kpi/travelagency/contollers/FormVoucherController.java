@@ -1,14 +1,8 @@
 package com.kpi.travelagency.contollers;
 
 import com.kpi.travelagency.constants.Status;
-import com.kpi.travelagency.entity.Tour;
-import com.kpi.travelagency.entity.TourNode;
-import com.kpi.travelagency.entity.UserNode;
-import com.kpi.travelagency.entity.Voucher;
-import com.kpi.travelagency.service.TourNodeService;
-import com.kpi.travelagency.service.TourServiceImpl;
-import com.kpi.travelagency.service.UserNodeService;
-import com.kpi.travelagency.service.VoucherService;
+import com.kpi.travelagency.entity.*;
+import com.kpi.travelagency.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,25 +21,32 @@ public class FormVoucherController {
     private TourNodeService tourNodeService;
     @Autowired
     private TourServiceImpl tourService;
+    @Autowired
+    private UserService userService;
     @GetMapping("/formVoucher/{id}")
     public String formVoucher(@PathVariable Integer id, Model model) {
         Tour tour = tourService.findById(Long.valueOf(id));
         model.addAttribute("tour", tour);
         model.addAttribute("totalPriceVoucher", tour.getPrice() + tour.getId_hotel().getPricePerNight());
+        model.addAttribute("isCreating", true);
         return "formVoucher";
     }
     @PostMapping("/formVoucher")
-    public String addVoucher(@RequestParam Integer id, @RequestParam Double totalPrice, @RequestParam Integer user, Model model) {
+    public String addVoucher(@RequestParam Integer id, @RequestParam Double totalPrice, @RequestParam String email, Model model) {
         Voucher voucher = new Voucher();
         voucher.setTotalPrice(totalPrice);
         voucher.setStatus(Status.IN_PROGRESS);
         voucher.setId(-1);
         voucherService.save(voucher);
+
+        User user1 = userService.findUserByEmail(email);
         voucher.setId(voucherService.setRightID());
         UserNode userNode = new UserNode();
-        userNode.setId(user);
+        userNode.setId(user1.getId());
         userNodeService.save(userNode);
+
         voucherService.makeRelationshipUserVoucher(voucher, userNode);
+
         TourNode tourNode = new TourNode();
         tourNode.setId(id);
         tourNodeService.save(tourNode);

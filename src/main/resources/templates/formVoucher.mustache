@@ -145,7 +145,11 @@
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
                                 <p class="text-center h4 fw-bold mb-3 mx-1 mx-md-1 mt-1">Personal information</p>
-
+                                {{#isCreating}}
+                                    <input type="email" id="form3Example3c" class="form-control" placeholder="Email" name="email"
+                                           value="{{#email}}{{email}}{{/email}}"/>
+                                {{/isCreating}}
+                                {{^isCreating}}
                                 <div class="table-responsive">
                                     <table class="table table-user-information">
                                         <tbody>
@@ -196,14 +200,14 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                <input type=hidden name="user" value=77788833>
+                                                <input type=hidden name="user" value=63adfdc96b0348324ac34c89>
                                                 77788833
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
-
+                                {{/isCreating}}
                             </div>
                         </div>
                         <div  class="d-flex justify-content-center mx-1 mb-1 mb-lg-1" style="margin-top:20px">
