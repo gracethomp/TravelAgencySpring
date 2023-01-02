@@ -144,62 +144,71 @@
 
                                     <p class="text-center h4 fw-bold mb-3 mx-1 mx-md-1 mt-1">Personal information</p>
 
-                                    <div class="table-responsive">
-                                        <table class="table table-user-information">
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <strong class="text-black">
-                                                        Name
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    John Doe
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong class="text-black">
-                                                        Email
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    john-doe@email.com
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong class="text-black">
-                                                        Phone Number
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    +1234567890
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong class="text-black">
-                                                        Date of birth
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    1978-11-23
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <strong class="text-black">
-                                                        Passport ID
-                                                    </strong>
-                                                </td>
-                                                <td class="text-primary">
-                                                    77788833
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+
+{{#user}}
+        <div class="table-responsive" >
+            <table class="table table-user-information">
+                <tbody>
+                <tr>
+                    <td>
+                        <strong class="text-black">
+                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                            Name
+                        </strong>
+                    </td>
+                    <td class="text-primary">
+                        {{name}}
+                    </td>
+                </tr>
+        <tr>
+            <td>
+                <strong class="text-black">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    Email
+                </strong>
+            </td>
+            <td class="text-primary">
+                {{email}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong class="text-black">
+                    <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
+                    Phone Number
+                </strong>
+            </td>
+            <td class="text-primary">
+                {{phoneNumber}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong class="text-black">
+                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                    Date of birth
+                </strong>
+            </td>
+            <td class="text-primary">
+                {{birthDate}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <strong class="text-black">
+                    <i class="fas fa-id-card fa-lg me-3 fa-fw"></i>
+                    Passport ID
+                </strong>
+            </td>
+            <td class="text-primary">
+                {{passportID}}
+            </td>
+        </tr>
+
+                                </tbody>
+                                </table>
+                                </div>
 
                                 </div>
                             </div>
@@ -233,13 +242,14 @@
                             {{/add}}
                             {{^add}}
                                 <div class="d-flex justify-content-center mx-1 mb-1 mb-lg-1">
-                                    <button class="btn btn-outline-success m-4 my-1 my-sm-3" type="submit" value=""><a href="/vouchers">Back</a></button>
+                                <button class="btn btn-outline-success m-4 my-1 my-sm-3" type="submit" value=""><a href="{{#isUser}}/vouchers/{{id}}{{/isUser}}{{^isUser}}/vouchers/{{/isUser}}">Back</a></button>
                                 </div>
                             {{/add}}
                         </div>
                     </div>
                 </div>
             </div>
+{{/user}}
         </div>
 </section>
 

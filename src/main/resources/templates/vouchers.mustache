@@ -74,8 +74,8 @@
             <div class="dropdown" style="margin-right: 100px">
                 <button class="dropbtn">Order by...</button>
                 <div class="dropdown-content">
-                    <a href="/vouchers/priceAsc">Price(asc)</a>
-                    <a href="/vouchers/priceDesc">Price(desc)</a>
+                    <a href="{{#isManager}}/vouchers/priceAsc{{/isManager}}{{^isManager}}/vouchers/priceAsc/{{idCur}}{{/isManager}}">Price(asc)</a>
+                    <a href="{{#isManager}}/vouchers/priceDesc{{/isManager}}{{^isManager}}/vouchers/priceDesc/{{idCur}}{{/isManager}}">Price(desc)</a>
                 </div>
             </div>
         </div>
@@ -94,7 +94,8 @@
     <tbody>
     {{#vouchers}}
     <tr>
-        <td><a href="/vouchers/status/{{id}}">{{id}}</a></td>
+        <td><a href={{#isManager}}"/vouchers/status/{{id}}"{{/isManager}}
+            {{^isManager}}"/vouchers/{{id}}/data"{{/isManager}}>{{id}}</a></td>
         <td></td>
         <td>{{tourName}}</td>
         <td>{{totalPrice}}</td>
