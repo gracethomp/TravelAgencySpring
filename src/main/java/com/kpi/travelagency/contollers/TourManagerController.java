@@ -80,7 +80,7 @@ public class TourManagerController {
     }
 
     @GetMapping(value = "/toursManager/{id}")
-    public String getUserById(Model model, @PathVariable Long id){
+    public String getTourById(Model model, @PathVariable Long id){
         Tour tour = null;
         try {
             tour = tourService.findById(id);
