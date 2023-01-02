@@ -148,6 +148,9 @@
                                 {{#isCreating}}
                                     <input type="email" id="form3Example3c" class="form-control" placeholder="Email" name="email"
                                            value="{{#email}}{{email}}{{/email}}"/>
+                                    <div class="error">
+                                        <p class="text-danger">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</p>
+                                    </div>
                                 {{/isCreating}}
                                 {{^isCreating}}
                                 <div class="table-responsive">
