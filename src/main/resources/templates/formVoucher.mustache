@@ -153,6 +153,7 @@
                                     </div>
                                 {{/isCreating}}
                                 {{^isCreating}}
+                                    {{#user}}
                                 <div class="table-responsive">
                                     <table class="table table-user-information">
                                         <tbody>
@@ -163,7 +164,7 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                John Doe
+                                                {{name}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -173,7 +174,7 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                john-doe@email.com
+                                                {{email}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -183,7 +184,7 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                +1234567890
+                                                {{phoneNumber}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -193,7 +194,7 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                1978-11-23
+                                                {{birthDate}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -203,13 +204,13 @@
                                                 </strong>
                                             </td>
                                             <td class="text-primary">
-                                                <input type=hidden name="user" value=63adfdc96b0348324ac34c89>
-                                                77788833
+                                                {{passportID}}
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
                                 </div>
+                                    {{/user}}
                                 {{/isCreating}}
                             </div>
                         </div>

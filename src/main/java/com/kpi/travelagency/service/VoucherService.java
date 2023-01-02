@@ -59,4 +59,7 @@ public class VoucherService {
     public List<TourNode> getToursByVoucher(Voucher voucher){
         return voucherRepository.getTourNodes(voucher);
     }
+    public String getIdUser(Voucher voucher) {
+        return voucherRepository.getUserByVoucher(voucher).get(0);
+    }
 }

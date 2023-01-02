@@ -1,11 +1,9 @@
 package com.kpi.travelagency.contollers;
 
 import com.kpi.travelagency.constants.Status;
-import com.kpi.travelagency.entity.Tour;
-import com.kpi.travelagency.entity.TourNode;
-import com.kpi.travelagency.entity.UserNode;
-import com.kpi.travelagency.entity.Voucher;
+import com.kpi.travelagency.entity.*;
 import com.kpi.travelagency.service.TourServiceImpl;
+import com.kpi.travelagency.service.UserService;
 import com.kpi.travelagency.service.VoucherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,15 +17,18 @@ import java.util.List;
 @Controller
 public class VoucherController {
     @Autowired
-    TourServiceImpl tourService;
+    private TourServiceImpl tourService;
     @Autowired
-    VoucherService voucherService;
+    private VoucherService voucherService;
+    @Autowired
+    private UserService userService;
     @GetMapping("/vouchers")
     public String vouchers(Model model) {
         List<Voucher> vouchers = voucherService.getVouchers();
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
         }
+        model.addAttribute("isManager", true);
         model.addAttribute("vouchers", vouchers);
         return "vouchers";
     }
@@ -37,6 +38,7 @@ public class VoucherController {
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
         }
+        model.addAttribute("isManager", true);
         model.addAttribute("vouchers", vouchers);
         return "vouchers";
     }
@@ -46,6 +48,7 @@ public class VoucherController {
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
         }
+        model.addAttribute("isManager", true);
         model.addAttribute("vouchers", vouchers);
         return "vouchers";
     }
@@ -74,6 +77,8 @@ public class VoucherController {
         Voucher voucher = voucherService.getVoucherByID(id);
         Integer tourID = voucherService.getTourByVaucher(voucher);
         Tour tour = tourService.findById(Long.valueOf(tourID));
+        User user = userService.findUserByID(voucherService.getIdUser(voucher));
+        model.addAttribute("user", user);
         model.addAttribute("tour", tour);
         model.addAttribute("totalPriceVoucher", tour.getPrice()
                 + tour.getId_hotel().getPricePerNight());
@@ -92,5 +97,42 @@ public class VoucherController {
     public String cancelSingleVoucher(@PathVariable Integer id, Model model){
         voucherService.setStatus(voucherService.getVoucherByID(id), Status.CANCELLED);
         return "home";
+    }
+    @GetMapping("/vouchers/{id}/data")
+    public String showDataToUser(@PathVariable Integer id, Model model){
+        Voucher voucher = voucherService.getVoucherByID(id);
+        Integer tourID = voucherService.getTourByVaucher(voucher);
+        Tour tour = tourService.findById(Long.valueOf(tourID));
+        User user = userService.findUserByID(voucherService.getIdUser(voucher));
+        model.addAttribute("isUser", true);
+        model.addAttribute("user", user);
+        model.addAttribute("tour", tour);
+        model.addAttribute("totalPriceVoucher", tour.getPrice()
+                + tour.getId_hotel().getPricePerNight());
+        model.addAttribute("uniqueOrderID", id);
+        model.addAttribute("add", false);
+        return "dataVoucher";
+    }
+    @GetMapping("/vouchers/priceAsc/{id}")
+    public String orderVouchersByPriceAsc(@PathVariable String id, Model model) {
+        List<Voucher> vouchers = voucherService.getVouchersSortedAsc("totalPrice");
+        for(Voucher v: vouchers) {
+            v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+        }
+        model.addAttribute("idCur", id);
+        model.addAttribute("isManager", false);
+        model.addAttribute("vouchers", vouchers);
+        return "vouchers";
+    }
+    @GetMapping("/vouchers/priceDesc/{id}")
+    public String orderVouchersByPriceDesc(@PathVariable String id, Model model) {
+        List<Voucher> vouchers = voucherService.getVouchersSortedDesc("totalPrice");
+        for(Voucher v: vouchers) {
+            v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+        }
+        model.addAttribute("idCur", id);
+        model.addAttribute("isManager", false);
+        model.addAttribute("vouchers", vouchers);
+        return "vouchers";
     }
 }
