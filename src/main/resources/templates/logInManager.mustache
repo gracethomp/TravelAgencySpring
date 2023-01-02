@@ -18,7 +18,7 @@
             href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
             rel="stylesheet"
     />
-    <title>Manager profile</title>
+    <title>Log in</title>
 </head>
 <body id="page-top">
 <header>
@@ -44,9 +44,6 @@
                     <a class="nav-link" href="/logIn">My profile<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="window.location.href='/createTour'">Create new tour</button>
-            </form>
         </div>
     </nav>
 </header>
@@ -59,49 +56,25 @@
                     <div class="card-body p-md-5">
                         <div class="row justify-content-center">
                             <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <form action="{{#add}}/logInManager{{/add}}" name="email" method="POST">
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{#add}}Log in as Manager{{/add}}</p>
 
-                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Manager Profile</p>
-                                {{#manager}}
-                                <div class="table-responsive">
-                                    <table class="table table-user-information">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <strong class="text-black">
-                                                    <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                                    Name
-                                                </strong>
-                                            </td>
-                                            <td class="text-primary">
-                                                {{name}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong class="text-black">
-                                                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                                    Email
-                                                </strong>
-                                            </td>
-                                            <td class="text-primary">
-                                                {{email}}
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                </div>
-                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                    <button class="btn btn-outline-dark m-4 my-2 my-sm-0" type="submit"
-                                            onclick="window.location.href='/tours'">View tours</button>
-                                    <button class="btn btn-outline-dark m-4 my-2 my-sm-0" type="submit"
-                                            onclick="window.location.href='/voucher'">View vouchers</button>
-                                    <button class="btn btn-outline-dark m-4 my-2 my-sm-0" type="submit"
-                                            onclick="window.location.href='/users'">View users</button>
-                                    <button class="btn btn-outline-dark m-4 my-2 my-sm-0" type="submit"
-                                            onclick="window.location.href='/statistics'">View statistics</button>
-                                </div>
-                                {{/manager}}
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form flex-fill mb-0">
+                                            <input type="email" id="form3Example3c" class="form-control" placeholder="Email" name="email" value="{{#email}}{{email}}{{/email}}"/>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">{{#add}}Log in as Manager{{/add}}</button>
+                                    </div>
+
+                                    <div class="error">
+                                        <p class="text-danger">{{#errorMessage}}{{errorMessage}}{{/errorMessage}}</p>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

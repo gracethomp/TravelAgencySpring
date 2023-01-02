@@ -1,8 +1,11 @@
 package com.kpi.travelagency.contollers;
 
+import com.kpi.travelagency.entity.Manager;
 import com.kpi.travelagency.entity.User;
 import com.kpi.travelagency.entity.Voucher;
+import com.kpi.travelagency.repo.ManagerRepository;
 import com.kpi.travelagency.repo.UserRepository;
+import com.kpi.travelagency.service.ManagerService;
 import com.kpi.travelagency.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +24,13 @@ public class LogInController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    ManagerService managerService;
+
+    @Autowired
+    private ManagerRepository managerRepository;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -44,6 +54,30 @@ public class LogInController {
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("add",true);
             return "logIn";
+        }
+    }
+
+    @GetMapping("/logInManager")
+    public String logInManager(Model model){
+        Manager manager = new Manager();
+        model.addAttribute("add",true);
+        model.addAttribute("email", manager.getEmail());
+        return "logInManager";
+    }
+
+    @PostMapping("/logInManager")
+    public String logInManager(Model model,
+                        @RequestParam String email) throws Exception {
+        try {
+            Manager manager1 = managerService.logInManager(email);
+           // return "redirect:/home";
+            return "redirect:/managerProfile/" + manager1.getId();
+        } catch (Exception ex) {
+            String errorMessage = ex.getMessage();
+            logger.error(errorMessage);
+            model.addAttribute("errorMessage", errorMessage);
+            model.addAttribute("add",true);
+            return "logInManager";
         }
     }
 
