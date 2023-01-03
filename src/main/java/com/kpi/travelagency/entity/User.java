@@ -1,13 +1,10 @@
 package com.kpi.travelagency.entity;
 
-import com.kpi.travelagency.constants.Role;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.ZonedDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 @Document(collection = "users")
