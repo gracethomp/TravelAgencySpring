@@ -3,6 +3,8 @@ package com.kpi.travelagency.entity;
 import com.kpi.travelagency.constants.HotelType;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity
 @Table(name="hotels")
 public class Hotel {
@@ -92,5 +94,18 @@ public class Hotel {
 
     public void setType(HotelType type) {
         this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hotel hotel = (Hotel) o;
+        return Objects.equals(id, hotel.id) && Objects.equals(name, hotel.name) && Objects.equals(pricePerNight, hotel.pricePerNight) && type == hotel.type && Objects.equals(id_city, hotel.id_city) && Objects.equals(id_country, hotel.id_country) && Objects.equals(rating, hotel.rating);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, pricePerNight, type, id_city, id_country, rating);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 @Entity
@@ -150,6 +151,19 @@ public class Tour implements Serializable {
 
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tour tour = (Tour) o;
+        return Objects.equals(id, tour.id) && Objects.equals(name, tour.name) && Objects.equals(price, tour.price) && Objects.equals(startDate, tour.startDate) && Objects.equals(endDate, tour.endDate) && Objects.equals(description, tour.description) && Objects.equals(duration, tour.duration) && Objects.equals(id_city, tour.id_city) && Objects.equals(country, tour.country) && Objects.equals(id_hotel, tour.id_hotel) && transportType == tour.transportType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, startDate, endDate, description, duration, id_city, country, id_hotel, transportType);
     }
 
     @Override

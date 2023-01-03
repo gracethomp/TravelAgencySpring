@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,6 +26,11 @@ public class VoucherService {
     }
     public List<Voucher> getVouchersSortedAsc(String property) {
         return voucherRepository.findAll(Sort.by(property).ascending());
+    }
+    public List<Voucher> getVouchersSortedByUser(UserNode userNode) {
+        List<Voucher> v = voucherRepository.vouchersByUserID(userNode);
+        Collections.sort(v);
+        return v;
     }
     public Voucher save(Voucher voucher){
         return voucherRepository.save(voucher);
@@ -62,4 +68,5 @@ public class VoucherService {
     public String getIdUser(Voucher voucher) {
         return voucherRepository.getUserByVoucher(voucher).get(0);
     }
+
 }

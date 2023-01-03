@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -27,6 +28,7 @@ public class VoucherController {
         List<Voucher> vouchers = voucherService.getVouchers();
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+            v.setEmail(userService.findUserByID(voucherService.getIdUser(v)).getEmail());
         }
         model.addAttribute("isManager", true);
         model.addAttribute("vouchers", vouchers);
@@ -37,6 +39,7 @@ public class VoucherController {
         List<Voucher> vouchers = voucherService.getVouchersSortedAsc("totalPrice");
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+            v.setEmail(userService.findUserByID(voucherService.getIdUser(v)).getEmail());
         }
         model.addAttribute("isManager", true);
         model.addAttribute("vouchers", vouchers);
@@ -47,6 +50,7 @@ public class VoucherController {
         List<Voucher> vouchers = voucherService.getVouchersSortedDesc("totalPrice");
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+            v.setEmail(userService.findUserByID(voucherService.getIdUser(v)).getEmail());
         }
         model.addAttribute("isManager", true);
         model.addAttribute("vouchers", vouchers);
@@ -59,7 +63,9 @@ public class VoucherController {
         List<Voucher> vouchers = voucherService.getVouchersByUserID(userNode);
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+            v.setEmail(userService.findUserByID(voucherService.getIdUser(v)).getEmail());
         }
+        model.addAttribute("idCur", id);
         model.addAttribute("vouchers", vouchers);
         return "vouchers";
     }
@@ -68,8 +74,13 @@ public class VoucherController {
         TourNode tourNode = new TourNode();
         tourNode.setId(id);
         List<Voucher> vouchers = voucherService.getVouchersByTourID(tourNode);
-        vouchers.forEach(e->e.setTourName(tourService.findById(Long.valueOf(id)).getName()));
+        //vouchers.forEach(e->e.setTourName(tourService.findById(Long.valueOf(id)).getName()));
+        for(Voucher v: vouchers) {
+            v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+            v.setEmail(userService.findUserByID(voucherService.getIdUser(v)).getEmail());
+        }
         model.addAttribute("vouchers", vouchers);
+        model.addAttribute("isManager", true);
         return "vouchers";
     }
     @GetMapping("/vouchers/status/{id}")
@@ -115,9 +126,12 @@ public class VoucherController {
     }
     @GetMapping("/vouchers/priceAsc/{id}")
     public String orderVouchersByPriceAsc(@PathVariable String id, Model model) {
-        List<Voucher> vouchers = voucherService.getVouchersSortedAsc("totalPrice");
+        UserNode userNode = new UserNode();
+        userNode.setId(id);
+        List<Voucher> vouchers = voucherService.getVouchersSortedByUser(userNode);
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+            v.setEmail(userService.findUserByID(voucherService.getIdUser(v)).getEmail());
         }
         model.addAttribute("idCur", id);
         model.addAttribute("isManager", false);
@@ -126,10 +140,14 @@ public class VoucherController {
     }
     @GetMapping("/vouchers/priceDesc/{id}")
     public String orderVouchersByPriceDesc(@PathVariable String id, Model model) {
-        List<Voucher> vouchers = voucherService.getVouchersSortedDesc("totalPrice");
+        UserNode userNode = new UserNode();
+        userNode.setId(id);
+        List<Voucher> vouchers = voucherService.getVouchersSortedByUser(userNode);
         for(Voucher v: vouchers) {
             v.setTourName(tourService.findById(Long.valueOf(voucherService.getTourByVaucher(v))).getName());
+            v.setEmail(userService.findUserByID(voucherService.getIdUser(v)).getEmail());
         }
+        vouchers.sort(Comparator.reverseOrder());
         model.addAttribute("idCur", id);
         model.addAttribute("isManager", false);
         model.addAttribute("vouchers", vouchers);

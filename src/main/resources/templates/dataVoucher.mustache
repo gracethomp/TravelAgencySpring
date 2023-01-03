@@ -231,18 +231,18 @@
                             </div>
                             {{#add}}
                             <div class="d-flex justify-content-center mx-1 mb-1 mb-lg-1">
-                                <form action="/vouchers/status/{{id}}/accept" name="tour" method="post">
+                                <form action="/vouchers/status/{{uniqueOrderID}}/accept" name="tour" method="post">
                                     <button class="btn btn-outline-success m-4 my-1 my-sm-3" type="submit"
                                             onclick="window.location.href='#'" value="">Accept</button>
                                 </form>
-                                <form action="/vouchers/status/{{id}}/cancel" name="tour" method="post">
+                                <form action="/vouchers/status/{{uniqueOrderID}}/cancel" name="tour" method="post">
                                     <button class="btn btn-outline-dark m-1 my-1 my-sm-3" type="submit">Cancel</button>
                                 </form>
                             </div>
                             {{/add}}
                             {{^add}}
                                 <div class="d-flex justify-content-center mx-1 mb-1 mb-lg-1">
-                                <button class="btn btn-outline-success m-4 my-1 my-sm-3" type="submit" value=""><a href="{{#isUser}}/vouchers/{{id}}{{/isUser}}{{^isUser}}/vouchers/{{/isUser}}">Back</a></button>
+                                <button class="btn btn-outline-success m-4 my-1 my-sm-3" type="submit" value=""><a href="{{#isUser}}/vouchers/{{id}}{{/isUser}}{{^isUser}}/vouchers{{/isUser}}">Back</a></button>
                                 </div>
                             {{/add}}
                         </div>
